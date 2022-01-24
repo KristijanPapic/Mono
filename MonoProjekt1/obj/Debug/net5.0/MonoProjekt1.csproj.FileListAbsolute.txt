@@ -1,0 +1,16 @@
+C:\Users\haah\source\repos\MonoProjekt1\bin\Debug\net5.0\MonoProjekt1.exe
+C:\Users\haah\source\repos\MonoProjekt1\bin\Debug\net5.0\MonoProjekt1.deps.json
+C:\Users\haah\source\repos\MonoProjekt1\bin\Debug\net5.0\MonoProjekt1.runtimeconfig.json
+C:\Users\haah\source\repos\MonoProjekt1\bin\Debug\net5.0\MonoProjekt1.runtimeconfig.dev.json
+C:\Users\haah\source\repos\MonoProjekt1\bin\Debug\net5.0\MonoProjekt1.dll
+C:\Users\haah\source\repos\MonoProjekt1\bin\Debug\net5.0\ref\MonoProjekt1.dll
+C:\Users\haah\source\repos\MonoProjekt1\bin\Debug\net5.0\MonoProjekt1.pdb
+C:\Users\haah\source\repos\MonoProjekt1\obj\Debug\net5.0\MonoProjekt1.csproj.AssemblyReference.cache
+C:\Users\haah\source\repos\MonoProjekt1\obj\Debug\net5.0\MonoProjekt1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\haah\source\repos\MonoProjekt1\obj\Debug\net5.0\MonoProjekt1.AssemblyInfoInputs.cache
+C:\Users\haah\source\repos\MonoProjekt1\obj\Debug\net5.0\MonoProjekt1.AssemblyInfo.cs
+C:\Users\haah\source\repos\MonoProjekt1\obj\Debug\net5.0\MonoProjekt1.csproj.CoreCompileInputs.cache
+C:\Users\haah\source\repos\MonoProjekt1\obj\Debug\net5.0\MonoProjekt1.dll
+C:\Users\haah\source\repos\MonoProjekt1\obj\Debug\net5.0\ref\MonoProjekt1.dll
+C:\Users\haah\source\repos\MonoProjekt1\obj\Debug\net5.0\MonoProjekt1.pdb
+C:\Users\haah\source\repos\MonoProjekt1\obj\Debug\net5.0\MonoProjekt1.genruntimeconfig.cache
