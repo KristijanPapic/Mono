@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonoProjekt1
 {
-    interface Bell
+    interface IBell
     {
         public void RingBell(string typeOfBell);
     }

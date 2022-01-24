@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\haah\\source\\repos\\MonoProjekt1\\MonoProjekt1.csproj": {}
+    "C:\\Mono\\MonoProjekt1\\MonoProjekt1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\haah\\source\\repos\\MonoProjekt1\\MonoProjekt1.csproj": {
+    "C:\\Mono\\MonoProjekt1\\MonoProjekt1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\haah\\source\\repos\\MonoProjekt1\\MonoProjekt1.csproj",
+        "projectUniqueName": "C:\\Mono\\MonoProjekt1\\MonoProjekt1.csproj",
         "projectName": "MonoProjekt1",
-        "projectPath": "C:\\Users\\haah\\source\\repos\\MonoProjekt1\\MonoProjekt1.csproj",
+        "projectPath": "C:\\Mono\\MonoProjekt1\\MonoProjekt1.csproj",
         "packagesPath": "C:\\Users\\haah\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\haah\\source\\repos\\MonoProjekt1\\obj\\",
+        "outputPath": "C:\\Mono\\MonoProjekt1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\haah\\AppData\\Roaming\\NuGet\\NuGet.Config",

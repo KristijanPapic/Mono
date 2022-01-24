@@ -32,7 +32,7 @@ namespace MonoProjekt1
         }
         public void MoveOutAppartment(string ownerName)
         {
-            Appartments.RemoveAll(appartment => appartment.GetSetOwnerName == ownerName);
+            Appartments.RemoveAll(appartment => appartment.GetSetOwnerName.Equals(ownerName));
             OccupiedAppartments--;
             Console.WriteLine(ownerName + " has moved out");
         }

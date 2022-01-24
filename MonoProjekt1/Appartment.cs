@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MonoProjekt1
 {
-    class Appartment : Bell
+    class Appartment : IBell
     {
-        private string OwnerName;
+        private String OwnerName;
         private int ResidentsNumber;
 
         public Appartment(string ownerName, int residentsNumber)
