@@ -13,6 +13,7 @@ namespace MonoProjekt1
             squareBuilding1.MoveInAppartment("marko", 6);
             squareBuilding1.MoveInAppartment("ante", 6);
 
+
             squareBuilding1.Appartments[0].RingBell("long");
 
             Console.WriteLine(squareBuilding1.Appartments[0].GetSetOwnerName);
@@ -20,6 +21,17 @@ namespace MonoProjekt1
             squareBuilding1.MoveOutAppartment("marko");
 
             Console.WriteLine(squareBuilding1.Appartments[0].GetSetOwnerName);
+
+            roundBuilding1.MoveInAppartment("ivan", 5);
+            roundBuilding1.MoveInAppartment("ana", 2);
+
+            Console.WriteLine("\n\n");
+
+            roundBuilding1.Detail();
+
+            Console.WriteLine("\n\n");
+
+            squareBuilding1.Detail();
 
 
 

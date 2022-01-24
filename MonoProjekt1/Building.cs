@@ -19,6 +19,11 @@ namespace MonoProjekt1
             else return false;
 ;        } 
 
+        public int GetNumberOfOccupiedAppartments()
+        {
+            return OccupiedAppartments;
+        }
+
         public void MoveInAppartment(string ownerName, int residentsNumber)
         {
             if (OccupiedAppartments < AppartmentsCapacity)
@@ -36,6 +41,7 @@ namespace MonoProjekt1
             OccupiedAppartments--;
             Console.WriteLine(ownerName + " has moved out");
         }
+
         public abstract double CalculateSurface();
     }
 }
