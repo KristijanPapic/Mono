@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2022-01-26T09:05:31.8532406Z"
+    },
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2022-01-26T09:05:35.7553232Z"
+    }
+  },
+  "parameters": {
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "7203b1f6-fa04-45f3-a18e-ba72b882183e"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "MonoProjekt"
+    }
+  }
+}
