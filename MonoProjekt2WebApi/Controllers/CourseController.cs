@@ -62,6 +62,12 @@ namespace MonoProjekt2WebApi.Controllers
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
+            HttpResponseMessage getCourseMessage = GetCourse(newCourse.GetId);
+            if (getCourseMessage.IsSuccessStatusCode)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "course with that id already exists");
+            }
+
             string sqlQuery = "insert into course (id,name) values (" + newCourse.GetId + ",'"
               + newCourse.GetName + "');";
             try

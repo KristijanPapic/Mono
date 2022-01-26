@@ -59,7 +59,13 @@ namespace MonoProjekt2WebApi.Controllers
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            string sqlQuery = "insert into student (id,firstName,lastname,courseId) values ('" + newStudent.GetId + "','"
+            HttpResponseMessage getStudentMessage = GetStudent(newStudent.GetId);
+            if (getStudentMessage.IsSuccessStatusCode)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "student with that id already exists");
+            }
+
+                string sqlQuery = "insert into student (id,firstName,lastname,courseId) values ('" + newStudent.GetId + "','"
               + newStudent.GetFirstName + "','" + newStudent.GetLastName + "','" + newStudent.GetCourseId + "');";
             try
             {
@@ -70,7 +76,6 @@ namespace MonoProjekt2WebApi.Controllers
             }
             catch (Exception exception)
             {
-                if (exception.Message.Contains("duplicate key")) return Request.CreateResponse(HttpStatusCode.BadRequest, "student with that id already exists");
                 return Request.CreateResponse(HttpStatusCode.BadRequest, exception);
 
             }
