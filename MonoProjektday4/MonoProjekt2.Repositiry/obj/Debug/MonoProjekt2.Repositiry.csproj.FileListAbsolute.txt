@@ -1,0 +1,15 @@
+C:\Mono\MonoProjekt2.Repositiry\bin\Debug\MonoProjekt2.Repositiry.dll
+C:\Mono\MonoProjekt2.Repositiry\bin\Debug\MonoProjekt2.Repositiry.pdb
+C:\Mono\MonoProjekt2.Repositiry\obj\Debug\MonoProjekt2.Repositiry.csproj.AssemblyReference.cache
+C:\Mono\MonoProjekt2.Repositiry\obj\Debug\MonoProjekt2.Repositiry.csproj.CoreCompileInputs.cache
+C:\Mono\MonoProjekt2.Repositiry\obj\Debug\MonoProjekt2.Repositiry.dll
+C:\Mono\MonoProjekt2.Repositiry\obj\Debug\MonoProjekt2.Repositiry.pdb
+C:\Mono\MonoProjekt2.Repositiry\bin\Debug\Habanero.Base.dll
+C:\Mono\MonoProjekt2.Repositiry\bin\Debug\Habanero.BO.dll
+C:\Mono\MonoProjekt2.Repositiry\bin\Debug\Habanero.Console.dll
+C:\Mono\MonoProjekt2.Repositiry\bin\Debug\Habanero.DB.dll
+C:\Mono\MonoProjekt2.Repositiry\bin\Debug\MonoProjekt2.Models.dll
+C:\Mono\MonoProjekt2.Repositiry\bin\Debug\MonoProjekt2.Models.pdb
+C:\Mono\MonoProjekt2.Repositiry\obj\Debug\MonoProjekt2.Repositiry.csproj.CopyComplete
+C:\Mono\MonoProjekt2.Repositiry\bin\Debug\System.Data.SqlClient.dll
+C:\Mono\MonoProjekt2.Repositiry\bin\Debug\System.Data.SqlClient.xml

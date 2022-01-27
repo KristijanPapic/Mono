@@ -1,0 +1,6 @@
+C:\Mono\MonoProjekt2.Common\bin\Debug\MonoProjekt2.Common.dll
+C:\Mono\MonoProjekt2.Common\bin\Debug\MonoProjekt2.Common.pdb
+C:\Mono\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.csproj.AssemblyReference.cache
+C:\Mono\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.csproj.CoreCompileInputs.cache
+C:\Mono\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.dll
+C:\Mono\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.pdb

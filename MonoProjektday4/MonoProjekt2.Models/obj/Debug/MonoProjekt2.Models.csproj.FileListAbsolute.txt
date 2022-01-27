@@ -1,0 +1,9 @@
+C:\Mono\MonoProjekt2.Models\bin\Debug\MonoProjekt2.Models.dll
+C:\Mono\MonoProjekt2.Models\bin\Debug\MonoProjekt2.Models.pdb
+C:\Mono\MonoProjekt2.Models\obj\Debug\MonoProjekt2.Models.csproj.AssemblyReference.cache
+C:\Mono\MonoProjekt2.Models\obj\Debug\MonoProjekt2.Models.csproj.CoreCompileInputs.cache
+C:\Mono\MonoProjekt2.Models\obj\Debug\MonoProjekt2.Models.dll
+C:\Mono\MonoProjekt2.Models\obj\Debug\MonoProjekt2.Models.pdb
+C:\Mono\MonoProjekt2.Models\bin\Debug\MonoProjekt2.Model.Common.dll
+C:\Mono\MonoProjekt2.Models\bin\Debug\MonoProjekt2.Model.Common.pdb
+C:\Mono\MonoProjekt2.Models\obj\Debug\MonoProjekt2.Models.csproj.CopyComplete
