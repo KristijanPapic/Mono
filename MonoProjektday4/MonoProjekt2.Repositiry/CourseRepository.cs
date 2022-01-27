@@ -3,9 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MonoProjekt2.DAL.Entities;
 
 namespace MonoProjekt2.Repository
 {
@@ -17,7 +15,7 @@ namespace MonoProjekt2.Repository
             List<CourseViewModel> courses = new List<CourseViewModel>();
             SqlConnection connection = new SqlConnection(connectionString);
 
-            string queryString = "select * from [dbo].[Course]";
+            string queryString = "select Course.Id,Course.Name,COUNT(Student.Id) AS NumberOfEnrolledStudents FROM Student LEFT JOIN Course ON Student.CourseId = Course.Id GROUP BY Course.Id,Course.Name;";
             SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
             DataSet course = new DataSet();
             try
@@ -29,9 +27,10 @@ namespace MonoProjekt2.Repository
             {
                 Console.WriteLine(exception);
             }
+            if (course.Tables[0].Rows.Count == 0) return null;
             foreach (DataRow dataRow in course.Tables[0].Rows)
             {
-                courses.Add(new CourseViewModel(Guid.Parse(Convert.ToString(dataRow["Id"])),Convert.ToString(dataRow["Name"])));
+                courses.Add(new CourseViewModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]),Convert.ToInt32(dataRow["NumberOfEnrolledStudents"])));
             }
             return courses;
 
@@ -41,7 +40,7 @@ namespace MonoProjekt2.Repository
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            string queryString = "select * from [dbo].[Course] where Id = @ID";
+            string queryString = "select Course.Id,Course.Name,COUNT(Student.Id) AS NumberOfEnrolledStudents FROM Student LEFT JOIN Course ON Student.CourseId = Course.Id WHERE Course.Id = @ID GROUP BY Course.Id,Course.Name;";
             SqlCommand command = new SqlCommand(queryString, connection);
             command.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
             command.Parameters["@ID"].Value = id;
@@ -60,11 +59,11 @@ namespace MonoProjekt2.Repository
             }
             if (course.Tables[0].Rows.Count == 0) return null;
             DataRow dataRow = course.Tables[0].Rows[0];
-            CourseViewModel courseModel = new CourseViewModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]));
+            CourseViewModel courseModel = new CourseViewModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]), Convert.ToInt32(dataRow["NumberOfEnrolledStudents"]));
             return courseModel;
         }
 
-        public Boolean PostNewCourse(CourseViewModel newCourse)
+        public Boolean PostNewCourse(CourseEntity newCourse)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -88,7 +87,7 @@ namespace MonoProjekt2.Repository
             return true;
 
         }
-        public Boolean Put(CourseViewModel updatedCourse)
+        public Boolean Put(CourseEntity updatedCourse)
         {
 
             SqlConnection connection = new SqlConnection(connectionString);

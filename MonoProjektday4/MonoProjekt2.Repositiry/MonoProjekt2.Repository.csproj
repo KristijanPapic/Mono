@@ -61,6 +61,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MonoProjekt2.DAL\MonoProjekt2.DAL.csproj">
+      <Project>{437ffee9-a46f-4529-8d58-c3a4ecb0f549}</Project>
+      <Name>MonoProjekt2.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonoProjekt2.Models\MonoProjekt2.Models.csproj">
       <Project>{4f15fea3-f5e3-4ad6-9c01-eacdb4297a70}</Project>
       <Name>MonoProjekt2.Models</Name>

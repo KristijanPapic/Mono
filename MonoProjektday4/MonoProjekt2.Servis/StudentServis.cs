@@ -2,9 +2,6 @@
 using MonoProjekt2WebApi.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonoProjekt2.Servis
 {
@@ -24,7 +21,7 @@ namespace MonoProjekt2.Servis
         public Boolean PostNewStuden(StudentViewModel newStudent)
         {
             StudentRepository repository = new StudentRepository();
-             return repository.PostNewStuden(newStudent);
+            return repository.PostNewStuden(newStudent);
         }
         public Boolean Put(StudentViewModel updatedStudent)
         {

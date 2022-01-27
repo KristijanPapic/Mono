@@ -1,9 +1,8 @@
-﻿using MonoProjekt2.Servis;
+﻿using MonoProjekt2.DAL.Entities;
+using MonoProjekt2.Servis;
 using MonoProjekt2WebApi.Models;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -15,31 +14,37 @@ namespace MonoProjekt2WebApi.Controllers
         public HttpResponseMessage GetAllCourses()
         {
             CourseServis servis = new CourseServis();
-            List<CourseViewModel> Courses = servis.GetAllCourses();
-            return Request.CreateResponse(HttpStatusCode.OK, Courses);
+            List<CourseViewModel> courses = servis.GetAllCourses();
+            if (courses == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there are curently no courses in the database");
+            else return Request.CreateResponse(HttpStatusCode.OK, courses);
         }
         public HttpResponseMessage GetCourse([FromUri] Guid id)
         {
             CourseServis servis = new CourseServis();
-            return Request.CreateResponse(HttpStatusCode.OK, servis.GetCourse(id));
+            CourseViewModel course = servis.GetCourse(id);
+            if (course == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there is curently no courses with that id");
+            else return Request.CreateResponse(HttpStatusCode.OK, course);
         }
 
-        public HttpResponseMessage PostNewCourse([FromBody] CourseViewModel newCourse)
+        public HttpResponseMessage PostNewCourse([FromBody] CourseEntity newCourse)
         {
             CourseServis servis = new CourseServis();
-            return Request.CreateResponse(HttpStatusCode.OK, servis.PostNewStuden(newCourse));
+            if (servis.PostNewStuden(newCourse)) return Request.CreateResponse(HttpStatusCode.OK, "course posted");
+            else return Request.CreateResponse(HttpStatusCode.BadRequest);
 
 
         }
-        public HttpResponseMessage Put([FromBody] CourseViewModel updatedCourse)
+        public HttpResponseMessage Put([FromBody] CourseEntity updatedCourse)
         {
             CourseServis servis = new CourseServis();
-            return Request.CreateResponse(HttpStatusCode.OK, servis.Put(updatedCourse));
+            if (servis.Put(updatedCourse)) return Request.CreateResponse(HttpStatusCode.OK, "course updated");
+            else return Request.CreateResponse(HttpStatusCode.NotFound, "no course with that id");
         }
         public HttpResponseMessage Delete([FromUri] Guid id)
         {
             CourseServis servis = new CourseServis();
-            return Request.CreateResponse(HttpStatusCode.OK, servis.Delete(id));
+            if (servis.Delete(id)) return Request.CreateResponse(HttpStatusCode.OK, "course deleted");
+            else return Request.CreateResponse(HttpStatusCode.NotFound, "no course with that id");
         }
     }
 }

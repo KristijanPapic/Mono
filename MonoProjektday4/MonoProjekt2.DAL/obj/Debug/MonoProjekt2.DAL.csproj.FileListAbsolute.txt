@@ -1,0 +1,6 @@
+D:\Mono\Mono\MonoProjektday4\MonoProjekt2.DAL\bin\Debug\MonoProjekt2.DAL.dll
+D:\Mono\Mono\MonoProjektday4\MonoProjekt2.DAL\bin\Debug\MonoProjekt2.DAL.pdb
+D:\Mono\Mono\MonoProjektday4\MonoProjekt2.DAL\obj\Debug\MonoProjekt2.DAL.csprojAssemblyReference.cache
+D:\Mono\Mono\MonoProjektday4\MonoProjekt2.DAL\obj\Debug\MonoProjekt2.DAL.csproj.CoreCompileInputs.cache
+D:\Mono\Mono\MonoProjektday4\MonoProjekt2.DAL\obj\Debug\MonoProjekt2.DAL.dll
+D:\Mono\Mono\MonoProjektday4\MonoProjekt2.DAL\obj\Debug\MonoProjekt2.DAL.pdb

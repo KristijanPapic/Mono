@@ -1,10 +1,8 @@
-﻿using MonoProjekt2.Repository;
+﻿using MonoProjekt2.DAL.Entities;
+using MonoProjekt2.Repository;
 using MonoProjekt2WebApi.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonoProjekt2.Servis
 {
@@ -21,12 +19,12 @@ namespace MonoProjekt2.Servis
             return repository.GetCourse(id);
         }
 
-        public Boolean PostNewStuden(CourseViewModel newCourse)
+        public Boolean PostNewStuden(CourseEntity newCourse)
         {
             CourseRepository repository = new CourseRepository();
             return repository.PostNewCourse(newCourse);
         }
-        public Boolean Put(CourseViewModel updatedCourse)
+        public Boolean Put(CourseEntity updatedCourse)
         {
             CourseRepository repository = new CourseRepository();
             return repository.Put(updatedCourse);
