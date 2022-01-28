@@ -51,3 +51,5 @@ D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Repositiry\obj\Debug\MonoProjekt2.Repo
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Repositiry\obj\Debug\MonoProjekt2.Repository.csproj.CopyComplete
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Repositiry\obj\Debug\MonoProjekt2.Repositiry.dll
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Repositiry\obj\Debug\MonoProjekt2.Repositiry.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Repositiry\bin\Debug\MonoProjekt2.DAL.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Repositiry\bin\Debug\MonoProjekt2.DAL.pdb

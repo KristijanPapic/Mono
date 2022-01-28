@@ -1,51 +1,62 @@
-﻿using MonoProjekt2.Servis;
+﻿using MonoProjekt2.Models.DomainModels;
+using MonoProjekt2.Servis;
 using MonoProjekt2WebApi.Models;
+using MonoProjekt2WebApi.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace MonoProjekt2WebApi.Controllers
 {
     public class StudentController : ApiController
     {
-        public HttpResponseMessage GetAllStudents()
+        public async Task<HttpResponseMessage> GetAllStudentsAsync()
         {
             StudentServis servis = new StudentServis();
-            List<StudentViewModel> students = servis.GetAllStudents();
+            List<Student> students =await  servis.GetAllStudentsAsync();
             if (students == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there are curently no students in the database");
-            else return Request.CreateResponse(HttpStatusCode.OK, students);
+            List<StudentViewModel> viewStudents = new List<StudentViewModel>();
+            foreach(Student student in students)
+            {
+                viewStudents.Add(new StudentViewModel(student.FirstName, student.LastName, student.Course.Name));
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, viewStudents);
         }
-        public HttpResponseMessage GetStudent([FromUri] Guid id)
+        public async Task<HttpResponseMessage> GetStudentAsync([FromUri] Guid id)
         {
             StudentServis servis = new StudentServis();
-            StudentViewModel student = servis.GetStudent(id);
+            Student student = await servis.GetStudentAsync(id);
             if (student == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there is curently no student with that id");
-            else return Request.CreateResponse(HttpStatusCode.OK, student);
+            StudentViewModel viewStudent = new StudentViewModel(student.FirstName, student.LastName, student.Course.Name);
+             return Request.CreateResponse(HttpStatusCode.OK, viewStudent);
         }
 
-        public HttpResponseMessage PostNewStudent([FromBody] StudentViewModel newStudent)
+        public async Task<HttpResponseMessage> PostNewStudentAsync([FromBody] StudentPostModel newStudent)
         {
 
             StudentServis servis = new StudentServis();
-            if (servis.PostNewStuden(newStudent)) return Request.CreateResponse(HttpStatusCode.OK, "student posted");
+            StudentDomainModel domainStudent = new StudentDomainModel(Guid.NewGuid(), newStudent.FirstName, newStudent.LastName, newStudent.CourseId);
+            if ( await servis.PostNewStudenAsync(domainStudent)) return Request.CreateResponse(HttpStatusCode.OK, "student posted");
             else return Request.CreateResponse(HttpStatusCode.BadRequest);
             
 
 
         }
-        public HttpResponseMessage Put([FromBody] StudentViewModel updatedStudent)
+        public async Task<HttpResponseMessage> PutAsync([FromBody] StudentPostModel updatedStudent)
         {
             StudentServis servis = new StudentServis();
-            if (servis.Put(updatedStudent)) return Request.CreateResponse(HttpStatusCode.OK, "student updated");
+            StudentDomainModel domainStudent = new StudentDomainModel(Guid.NewGuid(), updatedStudent.FirstName, updatedStudent.LastName, updatedStudent.CourseId);
+            if ( await servis.PutAsync(domainStudent)) return Request.CreateResponse(HttpStatusCode.OK, "student updated");
             else return Request.CreateResponse(HttpStatusCode.NotFound, "no student with that id");
             
         }
-        public HttpResponseMessage Delete([FromUri] Guid id)
+        public async Task<HttpResponseMessage> DeleteAsync([FromUri] Guid id)
         {
             StudentServis servis = new StudentServis();
-            if(servis.Delete(id)) return Request.CreateResponse(HttpStatusCode.OK,"student deleted");
+            if(await servis.Delete(id)) return Request.CreateResponse(HttpStatusCode.OK,"student deleted");
             else return Request.CreateResponse(HttpStatusCode.NotFound,"no student with that id");
         }
     }

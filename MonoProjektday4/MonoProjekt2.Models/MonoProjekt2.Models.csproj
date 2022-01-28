@@ -41,9 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CourseViewModel.cs" />
+    <Compile Include="Course.cs" />
+    <Compile Include="DomainModels\CourseDomainModel.cs" />
+    <Compile Include="DomainModels\StudentDomainModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StudentViewModel.cs" />
+    <Compile Include="Student.cs" />
+    <Compile Include="StudentListModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoProjekt2.Model.Common\MonoProjekt2.Model.Common.csproj">

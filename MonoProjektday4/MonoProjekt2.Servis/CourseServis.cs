@@ -1,38 +1,56 @@
 ﻿using MonoProjekt2.DAL.Entities;
+using MonoProjekt2.Models;
+using MonoProjekt2.Models.DomainModels;
 using MonoProjekt2.Repository;
 using MonoProjekt2WebApi.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MonoProjekt2.Servis
 {
     public class CourseServis
     {
-        public List<CourseViewModel> GetAllCourses()
+        public async Task<List<Course>> GetAllCoursesAsync()
         {
-            CourseRepository repository = new CourseRepository();
-            return repository.GetAllCourses();
+            CourseRepository courseRepository = new CourseRepository();
+            StudentRepository studentRepository = new StudentRepository();
+            List<CourseDomainModel> domainCourses = await courseRepository.GetAllCoursesAsync();
+            List<Course> courses = new List<Course>();
+            List<StudentListModel> students;
+            foreach(CourseDomainModel domainCourse in domainCourses)
+            {
+                students = await studentRepository.StudentByCourseAsync(domainCourse.Id);
+                courses.Add(new Course(domainCourse.Id, domainCourse.Name,students));
+            }
+            return courses;
         }
-        public CourseViewModel GetCourse(Guid id)
+        public async Task<Course> GetCourseAsync(Guid id)
         {
-            CourseRepository repository = new CourseRepository();
-            return repository.GetCourse(id);
+            CourseRepository courseRepository = new CourseRepository();
+            StudentRepository studentRepository = new StudentRepository();
+            CourseDomainModel domainCourse = await courseRepository.GetCourseAsync(id);
+            Course course = new Course(domainCourse.Id, domainCourse.Name, await studentRepository.StudentByCourseAsync(domainCourse.Id));
+            return course;
         }
 
-        public Boolean PostNewStuden(CourseEntity newCourse)
+        public async Task<Boolean> PostNewCourseAsync(Course newCourse)
         {
             CourseRepository repository = new CourseRepository();
-            return repository.PostNewCourse(newCourse);
+            Boolean result = await repository.PostNewCourseAsync(newCourse);
+            return result;
         }
-        public Boolean Put(CourseEntity updatedCourse)
+        public async Task<Boolean> PutAsync(Course updatedCourse)
         {
             CourseRepository repository = new CourseRepository();
-            return repository.Put(updatedCourse);
+            Boolean result = await repository.PutAsync(updatedCourse);
+            return result;
         }
-        public Boolean Delete(Guid id)
+        public async Task<Boolean> Delete(Guid id)
         {
             CourseRepository repository = new CourseRepository();
-            return repository.Delete(id);
+            Boolean result = await repository.DeleteAsync(id);
+            return result;
         }
     }
 }

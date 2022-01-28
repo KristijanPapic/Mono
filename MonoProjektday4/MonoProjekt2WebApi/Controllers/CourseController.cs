@@ -5,45 +5,46 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace MonoProjekt2WebApi.Controllers
 {
     public class CourseController : ApiController
     {
-        public HttpResponseMessage GetAllCourses()
+        public async Task<HttpResponseMessage> GetAllCourses()
         {
             CourseServis servis = new CourseServis();
-            List<CourseViewModel> courses = servis.GetAllCourses();
+            List<Course> courses = await servis.GetAllCoursesAsync();
             if (courses == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there are curently no courses in the database");
             else return Request.CreateResponse(HttpStatusCode.OK, courses);
         }
-        public HttpResponseMessage GetCourse([FromUri] Guid id)
+        public async Task<HttpResponseMessage> GetCourse([FromUri] Guid id)
         {
             CourseServis servis = new CourseServis();
-            CourseViewModel course = servis.GetCourse(id);
+            Course course = await  servis.GetCourseAsync(id);
             if (course == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there is curently no courses with that id");
             else return Request.CreateResponse(HttpStatusCode.OK, course);
         }
 
-        public HttpResponseMessage PostNewCourse([FromBody] CourseEntity newCourse)
+        public async Task<HttpResponseMessage> PostNewCourse([FromBody] Course newCourse)
         {
             CourseServis servis = new CourseServis();
-            if (servis.PostNewStuden(newCourse)) return Request.CreateResponse(HttpStatusCode.OK, "course posted");
+            if (await servis.PostNewCourseAsync(newCourse)) return Request.CreateResponse(HttpStatusCode.OK, "course posted");
             else return Request.CreateResponse(HttpStatusCode.BadRequest);
 
 
         }
-        public HttpResponseMessage Put([FromBody] CourseEntity updatedCourse)
+        public async Task<HttpResponseMessage> Put([FromBody] Course updatedCourse)
         {
             CourseServis servis = new CourseServis();
-            if (servis.Put(updatedCourse)) return Request.CreateResponse(HttpStatusCode.OK, "course updated");
+            if (await servis.PutAsync(updatedCourse)) return Request.CreateResponse(HttpStatusCode.OK, "course updated");
             else return Request.CreateResponse(HttpStatusCode.NotFound, "no course with that id");
         }
-        public HttpResponseMessage Delete([FromUri] Guid id)
+        public async Task<HttpResponseMessage> Delete([FromUri] Guid id)
         {
             CourseServis servis = new CourseServis();
-            if (servis.Delete(id)) return Request.CreateResponse(HttpStatusCode.OK, "course deleted");
+            if (await servis .Delete(id)) return Request.CreateResponse(HttpStatusCode.OK, "course deleted");
             else return Request.CreateResponse(HttpStatusCode.NotFound, "no course with that id");
         }
     }

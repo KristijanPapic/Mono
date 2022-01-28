@@ -404,3 +404,5 @@ D:\Mono\Mono\MonoProjektday4\MonoProjekt2WebApi\obj\Debug\MonoProjekt2WebApi.csp
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2WebApi\obj\Debug\MonoProjekt2WebApi.csproj.CopyComplete
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2WebApi\obj\Debug\MonoProjekt2WebApi.dll
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2WebApi\obj\Debug\MonoProjekt2WebApi.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\MonoProjekt2.DAL.dll
+C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\MonoProjekt2.DAL.pdb

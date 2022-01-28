@@ -1,8 +1,11 @@
-﻿using MonoProjekt2WebApi.Models;
+﻿using MonoProjekt2.Models;
+using MonoProjekt2.Models.DomainModels;
+using MonoProjekt2WebApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace MonoProjekt2.Repository
 {
@@ -10,17 +13,16 @@ namespace MonoProjekt2.Repository
     {
 
         private readonly string connectionString = "Server = tcp:monoprojektdbserver.database.windows.net,1433;Initial Catalog = monoprojekt; Persist Security Info=False;User ID = kristijan; Password=Robinhoodr52600;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
-        public List<StudentViewModel> GetAllStudents()
+        public async Task<List<StudentDomainModel>> GetAllStudentsAsync()
         {
-            List<StudentViewModel> students = new List<StudentViewModel>();
             SqlConnection connection = new SqlConnection(connectionString);
 
-            string queryString = "select * from [dbo].[student]";
+            string queryString = "select * from student";
             SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
             DataSet student = new DataSet();
             try
             {
-                adapter.Fill(student, "students");
+                await Task.Run(() => adapter.Fill(student));
                 connection.Close();
             }
             catch (Exception exception)
@@ -28,15 +30,53 @@ namespace MonoProjekt2.Repository
                 Console.WriteLine(exception);
             }
             if (student.Tables[0].Rows.Count == 0) return null;
+            List<StudentDomainModel> students = new List<StudentDomainModel>();
+            //CourseRepository courseRepository = new CourseRepository();
+            //CourseViewModel course;
             foreach (DataRow dataRow in student.Tables[0].Rows)
             {
-                students.Add(new StudentViewModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"]))));
+                //course = await courseRepository.GetCourseAsync(Guid.Parse(Convert.ToString(dataRow["CourseId"])));
+                students.Add(new StudentDomainModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"]))));
             }
+            //await
             return students;
 
 
         }
-        public StudentViewModel GetStudent(Guid id)
+        public async Task<List<StudentListModel>> StudentByCourseAsync(Guid courseId)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            string queryString = "select FirstName,LastName from student where CourseId = @CID";
+            SqlCommand command = new SqlCommand(queryString, connection);
+            command.Parameters.Add("@CID", SqlDbType.UniqueIdentifier);
+            command.Parameters["@CID"].Value = courseId;
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            DataSet student = new DataSet();
+            try
+            {
+                await Task.Run(() => adapter.Fill(student));
+                connection.Close();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+            if (student.Tables[0].Rows.Count == 0) return null;
+            List<StudentListModel> students = new List<StudentListModel>();
+            //CourseRepository courseRepository = new CourseRepository();
+            //CourseViewModel course;
+            foreach (DataRow dataRow in student.Tables[0].Rows)
+            {
+                //course = await courseRepository.GetCourseAsync(Guid.Parse(Convert.ToString(dataRow["CourseId"])));
+                students.Add(new StudentListModel(Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"])));
+            }
+            //await
+            return students;
+
+
+        }
+        public async Task<StudentDomainModel> GetStudentAsync(Guid id)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -48,7 +88,7 @@ namespace MonoProjekt2.Repository
             DataSet student = new DataSet();
             try
             {
-                adapter.Fill(student, "students");
+                await Task.Run(() => adapter.Fill(student, "students"));
                 connection.Close();
 
             }
@@ -57,12 +97,15 @@ namespace MonoProjekt2.Repository
                 Console.WriteLine(exception);
             }
             if (student.Tables[0].Rows.Count == 0) return null;
+            
             DataRow dataRow = student.Tables[0].Rows[0];
-            StudentViewModel studentModel = new StudentViewModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"])));
+            //CourseRepository courseRepository = new CourseRepository();
+            //CourseViewModel course = await courseRepository.GetCourseAsync(Guid.Parse(Convert.ToString(dataRow["CourseId"])));
+            StudentDomainModel studentModel = new StudentDomainModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"])));
             return studentModel;
         }
 
-        public Boolean PostNewStuden(StudentViewModel newStudent)
+        public async Task<bool> PostNewStudenAsync(StudentDomainModel newStudent)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -77,7 +120,7 @@ namespace MonoProjekt2.Repository
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                await command.ExecuteNonQueryAsync();
                 connection.Close();
             }
             catch (Exception exception)
@@ -90,7 +133,7 @@ namespace MonoProjekt2.Repository
             return true;
 
         }
-        public Boolean Put(StudentViewModel updatedStudent)
+        public async Task<Boolean> PutAsync(StudentDomainModel updatedStudent)
         {
 
             SqlConnection connection = new SqlConnection(connectionString);
@@ -107,7 +150,7 @@ namespace MonoProjekt2.Repository
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                await command.ExecuteNonQueryAsync();
                 connection.Close();
             }
             catch (Exception exception)
@@ -119,7 +162,7 @@ namespace MonoProjekt2.Repository
             return true;
 
         }
-        public Boolean Delete(Guid id)
+        public async  Task<Boolean> DeleteAsync(Guid id)
         {
 
             SqlConnection connection = new SqlConnection(connectionString);
@@ -130,7 +173,7 @@ namespace MonoProjekt2.Repository
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                await command.ExecuteNonQueryAsync ();
                 connection.Close();
             }
             catch (Exception exception)

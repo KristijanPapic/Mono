@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using MonoProjekt2.DAL.Entities;
+using System.Threading.Tasks;
+using MonoProjekt2.Models.DomainModels;
 
 namespace MonoProjekt2.Repository
 {
     public class CourseRepository
     {
         private readonly string connectionString = "Server = tcp:monoprojektdbserver.database.windows.net,1433;Initial Catalog = monoprojekt; Persist Security Info=False;User ID = kristijan; Password=Robinhoodr52600;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
-        public List<CourseViewModel> GetAllCourses()
+        public async Task<List<CourseDomainModel>> GetAllCoursesAsync()
         {
-            List<CourseViewModel> courses = new List<CourseViewModel>();
+            List<CourseDomainModel> courses = new List<CourseDomainModel>();
             SqlConnection connection = new SqlConnection(connectionString);
 
             string queryString = "select Course.Id,Course.Name,COUNT(Student.Id) AS NumberOfEnrolledStudents FROM Student LEFT JOIN Course ON Student.CourseId = Course.Id GROUP BY Course.Id,Course.Name;";
@@ -20,7 +22,7 @@ namespace MonoProjekt2.Repository
             DataSet course = new DataSet();
             try
             {
-                adapter.Fill(course, "courses");
+                await Task.Run(() => adapter.Fill(course, "courses"));
                 connection.Close();
             }
             catch (Exception exception)
@@ -30,13 +32,13 @@ namespace MonoProjekt2.Repository
             if (course.Tables[0].Rows.Count == 0) return null;
             foreach (DataRow dataRow in course.Tables[0].Rows)
             {
-                courses.Add(new CourseViewModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]),Convert.ToInt32(dataRow["NumberOfEnrolledStudents"])));
+                courses.Add(new CourseDomainModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"])));
             }
             return courses;
 
 
         }
-        public CourseViewModel GetCourse(Guid id)
+        public async Task<CourseDomainModel> GetCourseAsync(Guid id)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -49,7 +51,7 @@ namespace MonoProjekt2.Repository
             DataSet course = new DataSet();
             try
             {
-                adapter.Fill(course, "courses");
+                await Task.Run(() => adapter.Fill(course, "courses"));
                 connection.Close();
 
             }
@@ -59,11 +61,11 @@ namespace MonoProjekt2.Repository
             }
             if (course.Tables[0].Rows.Count == 0) return null;
             DataRow dataRow = course.Tables[0].Rows[0];
-            CourseViewModel courseModel = new CourseViewModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]), Convert.ToInt32(dataRow["NumberOfEnrolledStudents"]));
+            CourseDomainModel courseModel = new CourseDomainModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]));
             return courseModel;
         }
 
-        public Boolean PostNewCourse(CourseEntity newCourse)
+        public async Task<Boolean> PostNewCourseAsync(Course newCourse)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -74,7 +76,7 @@ namespace MonoProjekt2.Repository
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                await command.ExecuteNonQueryAsync();
                 connection.Close();
             }
             catch (Exception exception)
@@ -87,7 +89,7 @@ namespace MonoProjekt2.Repository
             return true;
 
         }
-        public Boolean Put(CourseEntity updatedCourse)
+        public async Task<Boolean> PutAsync(Course updatedCourse)
         {
 
             SqlConnection connection = new SqlConnection(connectionString);
@@ -101,7 +103,7 @@ namespace MonoProjekt2.Repository
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+               await command.ExecuteNonQueryAsync();
                 connection.Close();
             }
             catch (Exception exception)
@@ -113,7 +115,7 @@ namespace MonoProjekt2.Repository
             return true;
 
         }
-        public Boolean Delete(Guid id)
+        public async Task<Boolean> DeleteAsync(Guid id)
         {
 
             SqlConnection connection = new SqlConnection(connectionString);
@@ -124,7 +126,7 @@ namespace MonoProjekt2.Repository
             try
             {
                 connection.Open();
-                command.ExecuteNonQuery();
+                await command.ExecuteNonQueryAsync ();
                 connection.Close();
             }
             catch (Exception exception)

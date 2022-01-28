@@ -39,3 +39,5 @@ D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Servis.c
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Servis.csproj.CopyComplete
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Servis.dll
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Servis.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.DAL.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.DAL.pdb

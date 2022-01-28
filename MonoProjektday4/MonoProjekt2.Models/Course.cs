@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MonoProjekt2.Model.Common;
+using MonoProjekt2.Models;
 
 namespace MonoProjekt2WebApi.Models
 {
-    public class CourseViewModel : ICourse
+    public class Course : ICourse
     {
         private Guid id;
         private string name;
-        private int studentsEnrolled;
+        private List<StudentListModel> students;
 
-        public CourseViewModel(Guid id, string name, int studentsEnrolled)
+        public Course(Guid id, string name, List<StudentListModel> students)
         {
             Id = id;
             Name = name;
-            StudentsEnrolled = studentsEnrolled;
+            Students = students;
         }
 
         public Guid Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
-        public int StudentsEnrolled { get => studentsEnrolled; set => studentsEnrolled = value; }
+        public List<StudentListModel> Students { get => students; set => students = value; }
     }
 }
