@@ -43,7 +43,7 @@ namespace MonoProjekt2.Repository
 
 
         }
-        public async Task<List<StudentListModel>> StudentByCourseAsync(Guid courseId)
+        public async Task<List<StudentListModel>> StudentsByCourseAsync(Guid courseId)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -64,14 +64,11 @@ namespace MonoProjekt2.Repository
             }
             if (student.Tables[0].Rows.Count == 0) return null;
             List<StudentListModel> students = new List<StudentListModel>();
-            //CourseRepository courseRepository = new CourseRepository();
-            //CourseViewModel course;
+ 
             foreach (DataRow dataRow in student.Tables[0].Rows)
             {
-                //course = await courseRepository.GetCourseAsync(Guid.Parse(Convert.ToString(dataRow["CourseId"])));
                 students.Add(new StudentListModel(Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"])));
             }
-            //await
             return students;
 
 
@@ -109,8 +106,10 @@ namespace MonoProjekt2.Repository
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            string sqlQuery = "insert into Student (FirstName,LastName,CourseId) values (@FNAME,@LNAME,@CID);";
+            string sqlQuery = "insert into Student (Id,FirstName,LastName,CourseId) values (@ID,@FNAME,@LNAME,@CID);";
             SqlCommand command = new SqlCommand(sqlQuery, connection);
+            command.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
+            command.Parameters["@ID"].Value = newStudent.Id;
             command.Parameters.Add("@FNAME", SqlDbType.VarChar);
             command.Parameters["@FNAME"].Value = newStudent.FirstName;
             command.Parameters.Add("@LNAME", SqlDbType.VarChar);

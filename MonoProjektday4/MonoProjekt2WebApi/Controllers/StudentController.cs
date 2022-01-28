@@ -36,20 +36,19 @@ namespace MonoProjekt2WebApi.Controllers
 
         public async Task<HttpResponseMessage> PostNewStudentAsync([FromBody] StudentPostModel newStudent)
         {
-
+            
             StudentServis servis = new StudentServis();
             StudentDomainModel domainStudent = new StudentDomainModel(Guid.NewGuid(), newStudent.FirstName, newStudent.LastName, newStudent.CourseId);
             if ( await servis.PostNewStudenAsync(domainStudent)) return Request.CreateResponse(HttpStatusCode.OK, "student posted");
-            else return Request.CreateResponse(HttpStatusCode.BadRequest);
-            
+            else return Request.CreateResponse(HttpStatusCode.BadRequest); 
+
 
 
         }
-        public async Task<HttpResponseMessage> PutAsync([FromBody] StudentPostModel updatedStudent)
+        public async Task<HttpResponseMessage> PutAsync([FromBody] StudentDomainModel updatedStudent)
         {
             StudentServis servis = new StudentServis();
-            StudentDomainModel domainStudent = new StudentDomainModel(Guid.NewGuid(), updatedStudent.FirstName, updatedStudent.LastName, updatedStudent.CourseId);
-            if ( await servis.PutAsync(domainStudent)) return Request.CreateResponse(HttpStatusCode.OK, "student updated");
+            if ( await servis.PutAsync(updatedStudent)) return Request.CreateResponse(HttpStatusCode.OK, "student updated");
             else return Request.CreateResponse(HttpStatusCode.NotFound, "no student with that id");
             
         }

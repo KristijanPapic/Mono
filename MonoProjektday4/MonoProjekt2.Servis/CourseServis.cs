@@ -17,11 +17,9 @@ namespace MonoProjekt2.Servis
             StudentRepository studentRepository = new StudentRepository();
             List<CourseDomainModel> domainCourses = await courseRepository.GetAllCoursesAsync();
             List<Course> courses = new List<Course>();
-            List<StudentListModel> students;
             foreach(CourseDomainModel domainCourse in domainCourses)
             {
-                students = await studentRepository.StudentByCourseAsync(domainCourse.Id);
-                courses.Add(new Course(domainCourse.Id, domainCourse.Name,students));
+                courses.Add(new Course(domainCourse.Id, domainCourse.Name, await studentRepository.StudentsByCourseAsync(domainCourse.Id)));
             }
             return courses;
         }
@@ -30,17 +28,17 @@ namespace MonoProjekt2.Servis
             CourseRepository courseRepository = new CourseRepository();
             StudentRepository studentRepository = new StudentRepository();
             CourseDomainModel domainCourse = await courseRepository.GetCourseAsync(id);
-            Course course = new Course(domainCourse.Id, domainCourse.Name, await studentRepository.StudentByCourseAsync(domainCourse.Id));
+            Course course = new Course(domainCourse.Id, domainCourse.Name, await studentRepository.StudentsByCourseAsync(domainCourse.Id));
             return course;
         }
 
-        public async Task<Boolean> PostNewCourseAsync(Course newCourse)
+        public async Task<Boolean> PostNewCourseAsync(CourseDomainModel newCourse)
         {
             CourseRepository repository = new CourseRepository();
             Boolean result = await repository.PostNewCourseAsync(newCourse);
             return result;
         }
-        public async Task<Boolean> PutAsync(Course updatedCourse)
+        public async Task<Boolean> PutAsync(CourseDomainModel updatedCourse)
         {
             CourseRepository repository = new CourseRepository();
             Boolean result = await repository.PutAsync(updatedCourse);

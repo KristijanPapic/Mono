@@ -17,7 +17,7 @@ namespace MonoProjekt2.Repository
             List<CourseDomainModel> courses = new List<CourseDomainModel>();
             SqlConnection connection = new SqlConnection(connectionString);
 
-            string queryString = "select Course.Id,Course.Name,COUNT(Student.Id) AS NumberOfEnrolledStudents FROM Student LEFT JOIN Course ON Student.CourseId = Course.Id GROUP BY Course.Id,Course.Name;";
+            string queryString = "select * from course;";
             SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
             DataSet course = new DataSet();
             try
@@ -42,7 +42,7 @@ namespace MonoProjekt2.Repository
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            string queryString = "select Course.Id,Course.Name,COUNT(Student.Id) AS NumberOfEnrolledStudents FROM Student LEFT JOIN Course ON Student.CourseId = Course.Id WHERE Course.Id = @ID GROUP BY Course.Id,Course.Name;";
+            string queryString = "select * from course where id = @ID;";
             SqlCommand command = new SqlCommand(queryString, connection);
             command.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
             command.Parameters["@ID"].Value = id;
@@ -65,12 +65,14 @@ namespace MonoProjekt2.Repository
             return courseModel;
         }
 
-        public async Task<Boolean> PostNewCourseAsync(Course newCourse)
+        public async Task<Boolean> PostNewCourseAsync(CourseDomainModel newCourse)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            string sqlQuery = "insert into Course (Name) values (@NAME);";
+            string sqlQuery = "insert into Course (Id,Name) values (@ID,@NAME);";
             SqlCommand command = new SqlCommand(sqlQuery, connection);
+            command.Parameters.Add("@ID", SqlDbType.UniqueIdentifier);
+            command.Parameters["@ID"].Value = newCourse.Id;
             command.Parameters.Add("@NAME", SqlDbType.VarChar);
             command.Parameters["@NAME"].Value = newCourse.Name;
             try
@@ -89,7 +91,7 @@ namespace MonoProjekt2.Repository
             return true;
 
         }
-        public async Task<Boolean> PutAsync(Course updatedCourse)
+        public async Task<Boolean> PutAsync(CourseDomainModel updatedCourse)
         {
 
             SqlConnection connection = new SqlConnection(connectionString);

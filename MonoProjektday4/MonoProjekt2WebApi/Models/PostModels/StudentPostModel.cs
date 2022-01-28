@@ -11,7 +11,6 @@ namespace MonoProjekt2WebApi.Models
         private string lastName;
         private Guid courseId;
 
-        //course objekt i domain model isto
 
         public StudentPostModel(string firstName, string lastName, Guid courseId)
         {
