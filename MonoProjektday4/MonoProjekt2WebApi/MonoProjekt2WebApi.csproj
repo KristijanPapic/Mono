@@ -179,6 +179,8 @@
     </Compile>
     <Compile Include="Models\PostModels\CoursePostModel.cs" />
     <Compile Include="Models\PostModels\StudentPostModel.cs" />
+    <Compile Include="Models\UpdateModels\CourseUpdateModel.cs" />
+    <Compile Include="Models\UpdateModels\StudentUpdateModel.cs" />
     <Compile Include="Models\ViewModels\CourseViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -268,6 +270,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MonoProjekt2.Common\MonoProjekt2.Common.csproj">
+      <Project>{4787f116-58fe-4c9d-b6d1-525e2a57d406}</Project>
+      <Name>MonoProjekt2.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonoProjekt2.DAL\MonoProjekt2.DAL.csproj">
       <Project>{437FFEE9-A46F-4529-8D58-C3A4ECB0F549}</Project>
       <Name>MonoProjekt2.DAL</Name>
@@ -276,9 +282,9 @@
       <Project>{4F15FEA3-F5E3-4AD6-9C01-EACDB4297A70}</Project>
       <Name>MonoProjekt2.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MonoProjekt2.Servis\MonoProjekt2.Servis.csproj">
+    <ProjectReference Include="..\MonoProjekt2.Servis\MonoProjekt2.Service.csproj">
       <Project>{182664FB-874B-4C1F-959A-6DC405B2AA30}</Project>
-      <Name>MonoProjekt2.Servis</Name>
+      <Name>MonoProjekt2.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

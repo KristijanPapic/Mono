@@ -6,19 +6,31 @@ using System.Data.SqlClient;
 using MonoProjekt2.DAL.Entities;
 using System.Threading.Tasks;
 using MonoProjekt2.Models.DomainModels;
+using MonoProjekt2.Common.Filters;
 
 namespace MonoProjekt2.Repository
 {
     public class CourseRepository
     {
         private readonly string connectionString = "Server = tcp:monoprojektdbserver.database.windows.net,1433;Initial Catalog = monoprojekt; Persist Security Info=False;User ID = kristijan; Password=Robinhoodr52600;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
-        public async Task<List<CourseDomainModel>> GetAllCoursesAsync()
+        public async Task<List<CourseDomainModel>> GetAllCoursesAsync(CourseFilter courseFilter)
         {
             List<CourseDomainModel> courses = new List<CourseDomainModel>();
             SqlConnection connection = new SqlConnection(connectionString);
-
-            string queryString = "select * from course;";
-            SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
+            SqlCommand command;
+            string queryString;
+            if (courseFilter == null)
+            {
+                queryString = "select * from course";
+                command = new SqlCommand(queryString, connection);
+            }
+            else
+            {
+                queryString = "select * from course where Name like @FILTER";
+                command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@FILTER", "%" + courseFilter.NameFilterParam + "%");
+            }
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
             DataSet course = new DataSet();
             try
             {

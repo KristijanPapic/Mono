@@ -1,0 +1,17 @@
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Servis.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Servis.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.DAL.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Models.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Repositiry.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Model.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.DAL.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Models.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Repositiry.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Model.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Service.csproj.AssemblyReference.cache
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Service.csproj.CoreCompileInputs.cache
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Service.csproj.CopyComplete
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Servis.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Servis.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Common.pdb

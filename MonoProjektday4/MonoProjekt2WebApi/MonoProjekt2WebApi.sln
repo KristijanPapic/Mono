@@ -5,10 +5,11 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoProjekt2WebApi", "MonoProjekt2WebApi.csproj", "{3F4AD617-00FE-4D69-A00B-D863C1F21987}"
 	ProjectSection(ProjectDependencies) = postProject
+		{4787F116-58FE-4C9D-B6D1-525E2A57D406} = {4787F116-58FE-4C9D-B6D1-525E2A57D406}
 		{182664FB-874B-4C1F-959A-6DC405B2AA30} = {182664FB-874B-4C1F-959A-6DC405B2AA30}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoProjekt2.Servis", "..\MonoProjekt2.Servis\MonoProjekt2.Servis.csproj", "{182664FB-874B-4C1F-959A-6DC405B2AA30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoProjekt2.Service", "..\MonoProjekt2.Servis\MonoProjekt2.Service.csproj", "{182664FB-874B-4C1F-959A-6DC405B2AA30}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D4BAAD07-68BF-4337-B479-2D065534A113} = {D4BAAD07-68BF-4337-B479-2D065534A113}
 	EndProjectSection

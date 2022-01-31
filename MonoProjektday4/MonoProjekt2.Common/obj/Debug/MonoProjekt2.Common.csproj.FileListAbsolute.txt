@@ -10,3 +10,9 @@ D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.c
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.csproj.CoreCompileInputs.cache
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.dll
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Common\bin\Debug\MonoProjekt2.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Common\bin\Debug\MonoProjekt2.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.csproj.AssemblyReference.cache
+C:\Mono\MonoProjektday4\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.csproj.CoreCompileInputs.cache
+C:\Mono\MonoProjektday4\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Common\obj\Debug\MonoProjekt2.Common.pdb

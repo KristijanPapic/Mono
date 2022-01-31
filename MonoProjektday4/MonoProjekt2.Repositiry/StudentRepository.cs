@@ -1,6 +1,10 @@
-﻿using MonoProjekt2.Models;
+﻿using MonoProjekt2.Common.Filters;
+using MonoProjekt2.Common.Paging;
+using MonoProjekt2.Common.Sorting;
+using MonoProjekt2.Models;
 using MonoProjekt2.Models.DomainModels;
 using MonoProjekt2WebApi.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,12 +17,32 @@ namespace MonoProjekt2.Repository
     {
 
         private readonly string connectionString = "Server = tcp:monoprojektdbserver.database.windows.net,1433;Initial Catalog = monoprojekt; Persist Security Info=False;User ID = kristijan; Password=Robinhoodr52600;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
-        public async Task<List<StudentDomainModel>> GetAllStudentsAsync()
+        public async Task<List<StudentDomainModel>> GetAllStudentsAsync(StudentFilter studentFilter,Sort sort,Paging paging)
         {
+            
             SqlConnection connection = new SqlConnection(connectionString);
-
-            string queryString = "select * from student";
-            SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
+            SqlCommand command;
+            string queryString;
+            
+            if (studentFilter.NameFilterParam == "")
+            {
+                queryString = "select * from student";
+                command = new SqlCommand(queryString, connection);
+            }
+            else
+            { 
+                //using?
+                queryString = "select * from student where FirstName like @FILTER or LastName like @FILTER";
+                command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@FILTER", "%" + studentFilter.NameFilterParam + "%");
+            }
+            if(!(sort.SortBy == ""))
+            {
+                command.CommandText = command.CommandText.Insert(command.CommandText.Length, " order by " + sort.SortBy + " " + sort.SortMetod);
+            }
+            
+                command.CommandText = command.CommandText.Insert(command.CommandText.Length, " offset " + paging.GetPage() + " rows fetch next " + paging.Rpp + " rows only;");
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
             DataSet student = new DataSet();
             try
             {
@@ -31,14 +55,22 @@ namespace MonoProjekt2.Repository
             }
             if (student.Tables[0].Rows.Count == 0) return null;
             List<StudentDomainModel> students = new List<StudentDomainModel>();
-            //CourseRepository courseRepository = new CourseRepository();
-            //CourseViewModel course;
+
             foreach (DataRow dataRow in student.Tables[0].Rows)
             {
-                //course = await courseRepository.GetCourseAsync(Guid.Parse(Convert.ToString(dataRow["CourseId"])));
                 students.Add(new StudentDomainModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"]))));
             }
-            //await
+            //string countQuery = "select count(Id) from student";
+            //SqlCommand countCommand = new SqlCommand(countQuery, connection);
+            //connection.Open();
+            //SqlDataReader countReader = command.ExecuteReader();
+
+            //int count = countReader.Read() ? countReader.GetInt32(0) : -1;
+
+            
+            //PagedList<StudentDomainModel> pagedStudents = new PagedList<StudentDomainModel>(students,paging.Page,paging.Rpp);
+            //pagedStudents = 10;
+            //pagedStudents.c
             return students;
 
 

@@ -1,4 +1,5 @@
-﻿using MonoProjekt2.DAL.Entities;
+﻿using MonoProjekt2.Common.Filters;
+using MonoProjekt2.DAL.Entities;
 using MonoProjekt2.Models;
 using MonoProjekt2.Models.DomainModels;
 using MonoProjekt2.Repository;
@@ -9,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace MonoProjekt2.Servis
 {
-    public class CourseServis
+    public class CourseService
     {
-        public async Task<List<Course>> GetAllCoursesAsync()
+        public async Task<List<Course>> GetAllCoursesAsync(CourseFilter courseFilter)
         {
             CourseRepository courseRepository = new CourseRepository();
             StudentRepository studentRepository = new StudentRepository();
-            List<CourseDomainModel> domainCourses = await courseRepository.GetAllCoursesAsync();
+            List<CourseDomainModel> domainCourses = await courseRepository.GetAllCoursesAsync(courseFilter);
             List<Course> courses = new List<Course>();
             foreach(CourseDomainModel domainCourse in domainCourses)
             {

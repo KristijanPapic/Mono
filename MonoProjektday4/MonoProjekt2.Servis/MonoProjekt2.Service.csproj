@@ -41,11 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CourseServis.cs" />
-    <Compile Include="StudentServis.cs" />
+    <Compile Include="CourseService.cs" />
+    <Compile Include="StudentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MonoProjekt2.Common\MonoProjekt2.Common.csproj">
+      <Project>{4787f116-58fe-4c9d-b6d1-525e2a57d406}</Project>
+      <Name>MonoProjekt2.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MonoProjekt2.DAL\MonoProjekt2.DAL.csproj">
       <Project>{437FFEE9-A46F-4529-8D58-C3A4ECB0F549}</Project>
       <Name>MonoProjekt2.DAL</Name>

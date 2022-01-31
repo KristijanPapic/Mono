@@ -53,3 +53,7 @@ D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Repositiry\obj\Debug\MonoProjekt2.Repo
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Repositiry\obj\Debug\MonoProjekt2.Repositiry.pdb
 C:\Mono\MonoProjektday4\MonoProjekt2.Repositiry\bin\Debug\MonoProjekt2.DAL.dll
 C:\Mono\MonoProjektday4\MonoProjekt2.Repositiry\bin\Debug\MonoProjekt2.DAL.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Repositiry\bin\Debug\MonoProjekt2.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Repositiry\bin\Debug\MonoProjekt2.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Repositiry\bin\Debug\PagedList.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Repositiry\bin\Debug\PagedList.xml
