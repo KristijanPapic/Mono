@@ -17,7 +17,7 @@ namespace MonoProjekt2.Repository
     {
 
         private readonly string connectionString = "Server = tcp:monoprojektdbserver.database.windows.net,1433;Initial Catalog = monoprojekt; Persist Security Info=False;User ID = kristijan; Password=Robinhoodr52600;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
-        public async Task<List<StudentDomainModel>> GetAllStudentsAsync(StudentFilter studentFilter,Sort sort,Paging paging)
+        public async Task<StaticPagedList<Student>> GetAllStudentsAsync(StudentFilter studentFilter,Sort sort,Paging paging)
         {
             
             SqlConnection connection = new SqlConnection(connectionString);
@@ -54,24 +54,24 @@ namespace MonoProjekt2.Repository
                 Console.WriteLine(exception);
             }
             if (student.Tables[0].Rows.Count == 0) return null;
-            List<StudentDomainModel> students = new List<StudentDomainModel>();
+            List<Student> students = new List<Student>();
+
+            CourseRepository courseRepository = new CourseRepository();
+            List<Course> Courses = new List<Course>();
+            Courses = await courseRepository.GetAllCoursesAsync(null);
 
             foreach (DataRow dataRow in student.Tables[0].Rows)
             {
-                students.Add(new StudentDomainModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"]))));
+                students.Add(new Student(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"])),Courses.Find(course => course.Id.Equals(Guid.Parse(Convert.ToString(dataRow["CourseId"]))))));
             }
-            //string countQuery = "select count(Id) from student";
-            //SqlCommand countCommand = new SqlCommand(countQuery, connection);
-            //connection.Open();
-            //SqlDataReader countReader = command.ExecuteReader();
+            string countQuery = "select count(Id) as count from student";
+            SqlCommand countCommand = new SqlCommand(countQuery, connection);
+            DataTable count = new DataTable();
+            adapter.SelectCommand = countCommand;
+            await Task.Run(() => adapter.Fill(count));
 
-            //int count = countReader.Read() ? countReader.GetInt32(0) : -1;
-
-            
-            //PagedList<StudentDomainModel> pagedStudents = new PagedList<StudentDomainModel>(students,paging.Page,paging.Rpp);
-            //pagedStudents = 10;
-            //pagedStudents.c
-            return students;
+            StaticPagedList<Student> pagedStudents = new StaticPagedList<Student>(students, paging.Page, paging.Rpp, Convert.ToInt32(count.Rows[0]["count"]));
+            return pagedStudents;
 
 
         }

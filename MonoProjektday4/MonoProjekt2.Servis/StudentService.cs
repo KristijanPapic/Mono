@@ -4,6 +4,7 @@ using MonoProjekt2.Common.Sorting;
 using MonoProjekt2.Models.DomainModels;
 using MonoProjekt2.Repository;
 using MonoProjekt2WebApi.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,18 +13,12 @@ namespace MonoProjekt2.Servis
 {
     public class StudentService
     {
-        public async Task<List<Student>> GetAllStudentsAsync(StudentFilter studentFilter,Sort sort,Paging page)
+        StudentRepository studentRepository = new StudentRepository();
+        CourseService courseServis = new CourseService();
+        public async Task<StaticPagedList<Student>> GetAllStudentsAsync(StudentFilter studentFilter,Sort sort,Paging page)
         {
-            StudentRepository studentRepository = new StudentRepository();
-            CourseService courseServis = new CourseService();
-            List<StudentDomainModel> domainStudents = await studentRepository.GetAllStudentsAsync(studentFilter,sort,page);
-            List<Student> students = new List<Student>();
-            List<Course> courses = await courseServis.GetAllCoursesAsync(null);
-            foreach(StudentDomainModel domainStudent in domainStudents)
-            {
-                students.Add(new Student(domainStudent.Id, domainStudent.FirstName, domainStudent.LastName, domainStudent.CourseId, courses.Find(course => course.Id == domainStudent.CourseId)));
-            }
-            return students;
+            
+            return await studentRepository.GetAllStudentsAsync(studentFilter,sort,page);
         }
         public async Task<Student> GetStudentAsync(Guid id)
         {

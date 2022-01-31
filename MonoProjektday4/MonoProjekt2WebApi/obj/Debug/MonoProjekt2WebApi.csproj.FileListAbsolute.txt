@@ -408,3 +408,7 @@ C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\MonoProjekt2.DAL.dll
 C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\MonoProjekt2.DAL.pdb
 C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\MonoProjekt2.Common.dll
 C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\MonoProjekt2.Common.pdb
+D:\Mono\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\MonoProjekt2.Common.dll
+D:\Mono\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\PagedList.dll
+D:\Mono\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\MonoProjekt2.Common.pdb
+D:\Mono\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\PagedList.xml

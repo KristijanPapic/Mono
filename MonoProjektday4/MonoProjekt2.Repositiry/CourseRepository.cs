@@ -13,9 +13,9 @@ namespace MonoProjekt2.Repository
     public class CourseRepository
     {
         private readonly string connectionString = "Server = tcp:monoprojektdbserver.database.windows.net,1433;Initial Catalog = monoprojekt; Persist Security Info=False;User ID = kristijan; Password=Robinhoodr52600;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
-        public async Task<List<CourseDomainModel>> GetAllCoursesAsync(CourseFilter courseFilter)
+        public async Task<List<Course>> GetAllCoursesAsync(CourseFilter courseFilter)
         {
-            List<CourseDomainModel> courses = new List<CourseDomainModel>();
+            
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
             string queryString;
@@ -28,7 +28,7 @@ namespace MonoProjekt2.Repository
             {
                 queryString = "select * from course where Name like @FILTER";
                 command = new SqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@FILTER", "%" + courseFilter.NameFilterParam + "%");
+                command.Parameters.AddWithValue("@FILTER", "%" + courseFilter.NameFilterParam + "%");                  //napravim paging i sort za course kad paging za studenta do kraja napravim
             }
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             DataSet course = new DataSet();
@@ -41,10 +41,13 @@ namespace MonoProjekt2.Repository
             {
                 Console.WriteLine(exception);
             }
+            StudentRepository studentRepository = new StudentRepository();
+
             if (course.Tables[0].Rows.Count == 0) return null;
+            List<Course> courses = new List<Course>();
             foreach (DataRow dataRow in course.Tables[0].Rows)
             {
-                courses.Add(new CourseDomainModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"])));
+                courses.Add(new Course(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]),await studentRepository.StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["Id"])))));
             }
             return courses;
 

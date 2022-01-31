@@ -5,6 +5,7 @@ using MonoProjekt2.Models.DomainModels;
 using MonoProjekt2.Servis;
 using MonoProjekt2WebApi.Models;
 using MonoProjekt2WebApi.Models.ViewModels;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -17,12 +18,12 @@ namespace MonoProjekt2WebApi.Controllers
     public class StudentController : ApiController
     {
         StudentService service = new StudentService();
-        public async Task<HttpResponseMessage> GetAllStudentsAsync(string search="",string sortBy="",string sortMethod="",int page=1)
+        public async Task<HttpResponseMessage> GetAllStudentsAsync(string search="",string sortBy="FirstName",string sortMethod="",int page=1)
         {
             Paging paging = new Paging(page);
             StudentFilter studentFilter = new StudentFilter(search);
             Sort sort = new Sort(sortBy, sortMethod);
-            List<Student> students =await  service.GetAllStudentsAsync(studentFilter,sort,paging);
+            StaticPagedList<Student> students =await  service.GetAllStudentsAsync(studentFilter,sort,paging);
             if (students == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there are curently no students in the database");
             List<StudentViewModel> viewStudents = new List<StudentViewModel>();
             foreach(Student student in students)

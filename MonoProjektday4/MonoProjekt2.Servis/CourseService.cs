@@ -15,13 +15,7 @@ namespace MonoProjekt2.Servis
         public async Task<List<Course>> GetAllCoursesAsync(CourseFilter courseFilter)
         {
             CourseRepository courseRepository = new CourseRepository();
-            StudentRepository studentRepository = new StudentRepository();
-            List<CourseDomainModel> domainCourses = await courseRepository.GetAllCoursesAsync(courseFilter);
-            List<Course> courses = new List<Course>();
-            foreach(CourseDomainModel domainCourse in domainCourses)
-            {
-                courses.Add(new Course(domainCourse.Id, domainCourse.Name, await studentRepository.StudentsByCourseAsync(domainCourse.Id)));
-            }
+            List<Course> courses = await courseRepository.GetAllCoursesAsync(courseFilter);
             return courses;
         }
         public async Task<Course> GetCourseAsync(Guid id)
