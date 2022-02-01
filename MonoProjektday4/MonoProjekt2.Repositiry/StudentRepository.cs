@@ -13,35 +13,41 @@ using System.Threading.Tasks;
 
 namespace MonoProjekt2.Repository
 {
-    public class StudentRepository
+    public class StudentRepository : IStudentRepository
     {
 
         private readonly string connectionString = "Server = tcp:monoprojektdbserver.database.windows.net,1433;Initial Catalog = monoprojekt; Persist Security Info=False;User ID = kristijan; Password=Robinhoodr52600;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
-        public async Task<StaticPagedList<Student>> GetAllStudentsAsync(StudentFilter studentFilter,Sort sort,Paging paging)
+
+        public StudentRepository()
         {
-            
+        }
+
+        public async Task<IPagedList<Student>> GetAllStudentsAsync(StudentFilter studentFilter, Sort sort, Paging paging)
+        {
+
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
             string queryString;
-            
+
             if (studentFilter.NameFilterParam == "")
             {
                 queryString = "select student.Id as studentId,course.Id as CourseId,* from student inner join course on student.CourseId = Course.Id";
                 command = new SqlCommand(queryString, connection);
             }
             else
-            { 
+            {
                 //using?
+                //STRING BUILDER!
                 queryString = "select student.Id as studentId,course.Id as CourseId,* from student inner join course on student.CourseId = Course.Id where FirstName like @FILTER or LastName like @FILTER";
                 command = new SqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@FILTER", "%" + studentFilter.NameFilterParam + "%");
             }
-            if(!(sort.SortBy == ""))
+            if (!(sort.SortBy == ""))
             {
                 command.CommandText = command.CommandText.Insert(command.CommandText.Length, " order by " + sort.SortBy + " " + sort.SortMetod);
             }
-            
-                command.CommandText = command.CommandText.Insert(command.CommandText.Length, " offset " + paging.GetElementsStart() + " rows fetch next " + paging.Rpp + " rows only;");
+
+            command.CommandText = command.CommandText.Insert(command.CommandText.Length, " offset " + paging.GetElementsStart() + " rows fetch next " + paging.Rpp + " rows only;");
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             DataSet student = new DataSet();
             try
@@ -53,11 +59,11 @@ namespace MonoProjekt2.Repository
             {
                 Console.WriteLine(exception);
             }
-            if (student.Tables[0].Rows.Count == 0) return null;
+            //if (student.Tables[0].Rows.Count == 0) return null;
             List<Student> students = new List<Student>();
             foreach (DataRow dataRow in student.Tables[0].Rows)
             {
-                students.Add(new Student(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"])),new Course(Guid.Parse(Convert.ToString(dataRow["CourseId"])),Convert.ToString(dataRow["Name"]),await StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["CourseId"]))))));
+                students.Add(new Student(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"])), new Course(Guid.Parse(Convert.ToString(dataRow["CourseId"])), Convert.ToString(dataRow["Name"]), await StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["CourseId"]))))));
             }
             string countQuery = "select count(Id) as count from student";
             SqlCommand countCommand = new SqlCommand(countQuery, connection);
@@ -65,7 +71,7 @@ namespace MonoProjekt2.Repository
             adapter.SelectCommand = countCommand;
             await Task.Run(() => adapter.Fill(count));
 
-            StaticPagedList<Student> pagedStudents = new StaticPagedList<Student>(students, paging.Page, paging.Rpp, Convert.ToInt32(count.Rows[0]["count"]));
+            IPagedList<Student> pagedStudents = new StaticPagedList<Student>(students, paging.Page, paging.Rpp,Convert.ToInt32(count.Rows[0]["count"]));
             return pagedStudents;
 
 
@@ -91,7 +97,7 @@ namespace MonoProjekt2.Repository
             }
             if (student.Tables[0].Rows.Count == 0) return null;
             List<StudentListModel> students = new List<StudentListModel>();
- 
+
             foreach (DataRow dataRow in student.Tables[0].Rows)
             {
                 students.Add(new StudentListModel(Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"])));
@@ -100,19 +106,19 @@ namespace MonoProjekt2.Repository
 
 
         }
-        public async Task<StudentDomainModel> GetStudentAsync(Guid id)
+        public async Task<Student> GetStudentAsync(Guid id)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            string queryString = "select * from [dbo].[Student] where Id = @ID";
+            string queryString = "select student.Id as studentId,course.Id as CourseId,*from student inner join course on student.CourseId = Course.Id where studentId = @ID";
             SqlCommand command = new SqlCommand(queryString, connection);
             command.Parameters.AddWithValue("@ID", id);
             SqlDataAdapter adapter = new SqlDataAdapter(command);
 
-            DataSet student = new DataSet();
+            DataSet studentData = new DataSet();
             try
             {
-                await Task.Run(() => adapter.Fill(student, "students"));
+                await Task.Run(() => adapter.Fill(studentData, "students"));
                 connection.Close();
 
             }
@@ -120,13 +126,11 @@ namespace MonoProjekt2.Repository
             {
                 Console.WriteLine(exception);
             }
-            if (student.Tables[0].Rows.Count == 0) return null;
-            
-            DataRow dataRow = student.Tables[0].Rows[0];
-            //CourseRepository courseRepository = new CourseRepository();
-            //CourseViewModel course = await courseRepository.GetCourseAsync(Guid.Parse(Convert.ToString(dataRow["CourseId"])));
-            StudentDomainModel studentModel = new StudentDomainModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"])));
-            return studentModel;
+            //if (student.Tables[0].Rows.Count == 0) return ;
+
+            DataRow dataRow = studentData.Tables[0].Rows[0];
+            Student student = new Student(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"])), new Course(Guid.Parse(Convert.ToString(dataRow["CourseId"])), Convert.ToString(dataRow["Name"]), await StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["CourseId"])))));
+            return student;
         }
 
         public async Task<bool> PostNewStudenAsync(StudentDomainModel newStudent)
@@ -188,7 +192,7 @@ namespace MonoProjekt2.Repository
             return true;
 
         }
-        public async  Task<Boolean> DeleteAsync(Guid id)
+        public async Task<Boolean> DeleteAsync(Guid id)
         {
 
             SqlConnection connection = new SqlConnection(connectionString);
@@ -199,7 +203,7 @@ namespace MonoProjekt2.Repository
             try
             {
                 connection.Open();
-                await command.ExecuteNonQueryAsync ();
+                await command.ExecuteNonQueryAsync();
                 connection.Close();
             }
             catch (Exception exception)

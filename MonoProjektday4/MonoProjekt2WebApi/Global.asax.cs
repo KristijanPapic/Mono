@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MonoProjekt2WebApi.App_Start;
+using MonoProjekt2WebApi.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +15,9 @@ namespace MonoProjekt2WebApi
     {
         protected void Application_Start()
         {
+            ContainerConfig.Configure();
+
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

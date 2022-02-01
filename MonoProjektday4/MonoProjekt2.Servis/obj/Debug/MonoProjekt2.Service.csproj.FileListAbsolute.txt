@@ -36,3 +36,12 @@ D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Servis.d
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Servis.pdb
 C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\PagedList.dll
 C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\PagedList.xml
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Servis.dll.config
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Service.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Common.dll.config
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Repositiry.dll.config
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Service.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Service.Common.dll.config
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Repository.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Repository.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\MonoProjekt2.Repository.Common.dll.config

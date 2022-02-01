@@ -65,8 +65,17 @@
       <Project>{D4BAAD07-68BF-4337-B479-2D065534A113}</Project>
       <Name>MonoProjekt2.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MonoProjekt2.Repository.Common\MonoProjekt2.Repository.Common.csproj">
+      <Project>{B8887CC5-3432-4D09-BC40-E3045073821D}</Project>
+      <Name>MonoProjekt2.Repository.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonoProjekt2.Service.Common\MonoProjekt2.Service.Common.csproj">
+      <Project>{d79f997b-642c-4eaa-b954-dd020ec35c0b}</Project>
+      <Name>MonoProjekt2.Service.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

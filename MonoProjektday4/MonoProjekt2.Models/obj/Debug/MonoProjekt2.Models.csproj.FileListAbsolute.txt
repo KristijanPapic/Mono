@@ -25,3 +25,5 @@ C:\Mono\MonoProjektday4\MonoProjekt2.Models\obj\Debug\MonoProjekt2.Models.csproj
 C:\Mono\MonoProjektday4\MonoProjekt2.Models\obj\Debug\MonoProjekt2.Models.csproj.CopyComplete
 C:\Mono\MonoProjektday4\MonoProjekt2.Models\obj\Debug\MonoProjekt2.Models.dll
 C:\Mono\MonoProjektday4\MonoProjekt2.Models\obj\Debug\MonoProjekt2.Models.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Models\bin\Debug\PagedList.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Models\bin\Debug\PagedList.xml

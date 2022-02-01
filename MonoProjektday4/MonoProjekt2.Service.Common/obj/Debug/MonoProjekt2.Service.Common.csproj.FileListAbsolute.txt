@@ -1,0 +1,17 @@
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\MonoProjekt2.Service.Common.dll.config
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\MonoProjekt2.Service.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\MonoProjekt2.Service.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\MonoProjekt2.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\MonoProjekt2.Models.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\PagedList.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\MonoProjekt2.Model.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\MonoProjekt2.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\MonoProjekt2.Common.dll.config
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\MonoProjekt2.Models.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\PagedList.xml
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\bin\Debug\MonoProjekt2.Model.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\obj\Debug\MonoProjekt2.Service.Common.csproj.AssemblyReference.cache
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\obj\Debug\MonoProjekt2.Service.Common.csproj.CoreCompileInputs.cache
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\obj\Debug\MonoProjekt2.Service.Common.csproj.CopyComplete
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\obj\Debug\MonoProjekt2.Service.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Service.Common\obj\Debug\MonoProjekt2.Service.Common.pdb

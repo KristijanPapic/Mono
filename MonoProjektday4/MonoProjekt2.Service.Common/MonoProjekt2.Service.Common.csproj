@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\MonoProjekt2WebApi\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,7 +45,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="ICourseService.cs" />
+    <Compile Include="IStudentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MonoProjekt2.Common\MonoProjekt2.Common.csproj">
+      <Project>{4787F116-58FE-4C9D-B6D1-525E2A57D406}</Project>
+      <Name>MonoProjekt2.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MonoProjekt2.Models\MonoProjekt2.Models.csproj">
+      <Project>{4F15FEA3-F5E3-4AD6-9C01-EACDB4297A70}</Project>
+      <Name>MonoProjekt2.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

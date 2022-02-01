@@ -10,3 +10,14 @@ C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\obj\Debug\MonoProjekt2.Re
 C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\obj\Debug\MonoProjekt2.Repository.Common.csproj.CoreCompileInputs.cache
 C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\obj\Debug\MonoProjekt2.Repository.Common.dll
 C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\obj\Debug\MonoProjekt2.Repository.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\bin\Debug\MonoProjekt2.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\bin\Debug\MonoProjekt2.Models.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\bin\Debug\PagedList.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\bin\Debug\MonoProjekt2.Model.Common.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\bin\Debug\MonoProjekt2.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\bin\Debug\MonoProjekt2.Common.dll.config
+C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\bin\Debug\MonoProjekt2.Models.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\bin\Debug\PagedList.xml
+C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\bin\Debug\MonoProjekt2.Model.Common.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\obj\Debug\MonoProjekt2.Repository.Common.csproj.CopyComplete
+C:\Mono\MonoProjektday4\MonoProjekt2.Repository.Common\bin\Debug\MonoProjekt2.Repository.Common.dll.config

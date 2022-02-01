@@ -10,12 +10,20 @@ using MonoProjekt2.Common.Filters;
 
 namespace MonoProjekt2.Repository
 {
-    public class CourseRepository
+    public class CourseRepository : ICourseRepository
     {
+        IStudentRepository studentRepository;
+
         private readonly string connectionString = "Server = tcp:monoprojektdbserver.database.windows.net,1433;Initial Catalog = monoprojekt; Persist Security Info=False;User ID = kristijan; Password=Robinhoodr52600;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
-        public async Task<List<Course>> GetAllCoursesAsync(Boolean dontGetList,CourseFilter courseFilter)
+
+        public CourseRepository(IStudentRepository studentRepository)
         {
-            
+            this.studentRepository = studentRepository;
+        }
+
+        public async Task<List<Course>> GetAllCoursesAsync(Boolean dontGetList, CourseFilter courseFilter)
+        {
+
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
             string queryString;
@@ -47,13 +55,13 @@ namespace MonoProjekt2.Repository
             List<Course> courses = new List<Course>();
             foreach (DataRow dataRow in course.Tables[0].Rows)
             {
-                courses.Add(new Course(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]),dontGetList ? new List<Models.StudentListModel>() : await studentRepository.StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["Id"])))));
+                courses.Add(new Course(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]), dontGetList ? new List<Models.StudentListModel>() : await studentRepository.StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["Id"])))));
             }
             return courses;
 
 
         }
-        public async Task<CourseDomainModel> GetCourseAsync(Guid id)
+        public async Task<Course> GetCourseAsync(Guid id)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -76,7 +84,7 @@ namespace MonoProjekt2.Repository
             }
             if (course.Tables[0].Rows.Count == 0) return null;
             DataRow dataRow = course.Tables[0].Rows[0];
-            CourseDomainModel courseModel = new CourseDomainModel(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]));
+            Course courseModel = new Course(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]),await studentRepository.StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["Id"]))));
             return courseModel;
         }
 
@@ -120,7 +128,7 @@ namespace MonoProjekt2.Repository
             try
             {
                 connection.Open();
-               await command.ExecuteNonQueryAsync();
+                await command.ExecuteNonQueryAsync();
                 connection.Close();
             }
             catch (Exception exception)
@@ -143,7 +151,7 @@ namespace MonoProjekt2.Repository
             try
             {
                 connection.Open();
-                await command.ExecuteNonQueryAsync ();
+                await command.ExecuteNonQueryAsync();
                 connection.Close();
             }
             catch (Exception exception)

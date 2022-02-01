@@ -8,44 +8,46 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-namespace MonoProjekt2.Servis
+namespace MonoProjekt2.Servis.Common
 {
-    public class StudentService
+    public class StudentService : IStudentService
     {
-        StudentRepository studentRepository = new StudentRepository();
-        CourseService courseServis = new CourseService();
-        public async Task<StaticPagedList<Student>> GetAllStudentsAsync(StudentFilter studentFilter,Sort sort,Paging page)
+        IStudentRepository studentRepository;
+        ICourseService courseService;
+
+        //StudentRepository studentRepository = new StudentRepository();
+
+        public StudentService(IStudentRepository studentRepository,ICourseService courseService)
         {
-            
-            return await studentRepository.GetAllStudentsAsync(studentFilter,sort,page);
+            this.studentRepository = studentRepository;
+            this.courseService = courseService;
+        }
+
+        public async Task<IPagedList<Student>> GetAllStudentsAsync(StudentFilter studentFilter, Sort sort, Paging page)
+        {
+
+            return await studentRepository.GetAllStudentsAsync(studentFilter, sort, page);
         }
         public async Task<Student> GetStudentAsync(Guid id)
         {
-            StudentRepository studentRepository = new StudentRepository();
-            CourseService courseServis = new CourseService();
-            StudentDomainModel domainStudent = await studentRepository.GetStudentAsync(id);
-            Student student = new Student(domainStudent.Id,domainStudent.FirstName,domainStudent.LastName,domainStudent.CourseId,await courseServis.GetCourseAsync(domainStudent.CourseId));
+            Student student = await studentRepository.GetStudentAsync(id);
 
             return student;
         }
 
         public async Task<Boolean> PostNewStudenAsync(StudentDomainModel newStudent)
         {
-            StudentRepository repository = new StudentRepository();
-            Boolean result = await repository.PostNewStudenAsync(newStudent);
+            Boolean result = await studentRepository.PostNewStudenAsync(newStudent);
             return result;
         }
         public async Task<Boolean> PutAsync(StudentDomainModel updatedStudent)
         {
-            StudentRepository repository = new StudentRepository();
-            Boolean result = await repository.PutAsync(updatedStudent);
+            Boolean result = await studentRepository.PutAsync(updatedStudent);
             return result;
         }
         public async Task<Boolean> Delete(Guid id)
         {
-            StudentRepository repository = new StudentRepository();
-            Boolean result = await repository.DeleteAsync(id);
+            Boolean result = await studentRepository.DeleteAsync(id);
             return result;
         }
     }

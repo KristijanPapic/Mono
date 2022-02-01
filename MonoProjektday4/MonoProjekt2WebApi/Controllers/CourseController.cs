@@ -16,11 +16,17 @@ namespace MonoProjekt2WebApi.Controllers
 {
     public class CourseController : ApiController
     {
-        CourseService service = new CourseService();
+        ICourseService courseService;
+
+        public CourseController(ICourseService courseService)
+        {
+            this.courseService = courseService;
+        }
+
         public async Task<HttpResponseMessage> GetAllCourses(Boolean dontGetList = false,string search="")
         {
             CourseFilter courseFilter = new CourseFilter(search);
-            List<Course> courses = await service.GetAllCoursesAsync(dontGetList,courseFilter);
+            List<Course> courses = await courseService.GetAllCoursesAsync(dontGetList,courseFilter);
             if (courses == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there are curently no courses in the database");
             List<CourseViewModel> viewCourses = new List<CourseViewModel>();
             foreach(Course course in courses)
@@ -31,7 +37,7 @@ namespace MonoProjekt2WebApi.Controllers
         }
         public async Task<HttpResponseMessage> GetCourse([FromUri] Guid id)
         {
-            Course course = await  service.GetCourseAsync(id);
+            Course course = await  courseService.GetCourseAsync(id);
             if (course == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there is curently no courses with that id");
             CourseViewModel viewCourse = new CourseViewModel(course.Id, course.Name, course.Students.Count, course.Students);
             return Request.CreateResponse(HttpStatusCode.OK, viewCourse);
@@ -40,7 +46,7 @@ namespace MonoProjekt2WebApi.Controllers
         public async Task<HttpResponseMessage> PostNewCourse([FromBody] CoursePostModel newCourse)
         {
             CourseDomainModel domainCourse = new CourseDomainModel(Guid.NewGuid(), newCourse.Name);
-            if (await service.PostNewCourseAsync(domainCourse)) return Request.CreateResponse(HttpStatusCode.OK, "course posted");
+            if (await courseService.PostNewCourseAsync(domainCourse)) return Request.CreateResponse(HttpStatusCode.OK, "course posted");
             else return Request.CreateResponse(HttpStatusCode.BadRequest);
 
 
@@ -49,12 +55,12 @@ namespace MonoProjekt2WebApi.Controllers
         {
             CourseDomainModel domainCourse = new CourseDomainModel(updatedCourse.Id, updatedCourse.Name);
 
-            if (await service.PutAsync(domainCourse)) return Request.CreateResponse(HttpStatusCode.OK, "course updated");
+            if (await courseService.PutAsync(domainCourse)) return Request.CreateResponse(HttpStatusCode.OK, "course updated");
             else return Request.CreateResponse(HttpStatusCode.NotFound, "no course with that id");
         }
         public async Task<HttpResponseMessage> Delete([FromUri] Guid id)
         {
-            if (await service .Delete(id)) return Request.CreateResponse(HttpStatusCode.OK, "course deleted");
+            if (await courseService .Delete(id)) return Request.CreateResponse(HttpStatusCode.OK, "course deleted");
             else return Request.CreateResponse(HttpStatusCode.NotFound, "no course with that id");
         }
     }
