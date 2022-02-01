@@ -34,3 +34,5 @@ D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Service.
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Service.csproj.CopyComplete
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Servis.dll
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Servis\obj\Debug\MonoProjekt2.Servis.pdb
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\PagedList.dll
+C:\Mono\MonoProjektday4\MonoProjekt2.Servis\bin\Debug\PagedList.xml

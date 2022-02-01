@@ -19,7 +19,7 @@ namespace MonoProjekt2.Common.Paging
         public int Rpp { get => rpp; set => rpp = value; }
         public int Page { get => page; set => page = value; }
 
-        public int GetPage()
+        public int GetElementsStart()
         {
             return Rpp * (Page-1);
         }

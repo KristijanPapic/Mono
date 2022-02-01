@@ -26,13 +26,13 @@ namespace MonoProjekt2.Repository
             
             if (studentFilter.NameFilterParam == "")
             {
-                queryString = "select * from student";
+                queryString = "select student.Id as studentId,course.Id as CourseId,* from student inner join course on student.CourseId = Course.Id";
                 command = new SqlCommand(queryString, connection);
             }
             else
             { 
                 //using?
-                queryString = "select * from student where FirstName like @FILTER or LastName like @FILTER";
+                queryString = "select student.Id as studentId,course.Id as CourseId,* from student inner join course on student.CourseId = Course.Id where FirstName like @FILTER or LastName like @FILTER";
                 command = new SqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@FILTER", "%" + studentFilter.NameFilterParam + "%");
             }
@@ -41,7 +41,7 @@ namespace MonoProjekt2.Repository
                 command.CommandText = command.CommandText.Insert(command.CommandText.Length, " order by " + sort.SortBy + " " + sort.SortMetod);
             }
             
-                command.CommandText = command.CommandText.Insert(command.CommandText.Length, " offset " + paging.GetPage() + " rows fetch next " + paging.Rpp + " rows only;");
+                command.CommandText = command.CommandText.Insert(command.CommandText.Length, " offset " + paging.GetElementsStart() + " rows fetch next " + paging.Rpp + " rows only;");
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             DataSet student = new DataSet();
             try
@@ -55,14 +55,9 @@ namespace MonoProjekt2.Repository
             }
             if (student.Tables[0].Rows.Count == 0) return null;
             List<Student> students = new List<Student>();
-
-            CourseRepository courseRepository = new CourseRepository();
-            List<Course> Courses = new List<Course>();
-            Courses = await courseRepository.GetAllCoursesAsync(null);
-
             foreach (DataRow dataRow in student.Tables[0].Rows)
             {
-                students.Add(new Student(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"])),Courses.Find(course => course.Id.Equals(Guid.Parse(Convert.ToString(dataRow["CourseId"]))))));
+                students.Add(new Student(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["FirstName"]), Convert.ToString(dataRow["LastName"]), Guid.Parse(Convert.ToString(dataRow["CourseId"])),new Course(Guid.Parse(Convert.ToString(dataRow["CourseId"])),Convert.ToString(dataRow["Name"]),await StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["CourseId"]))))));
             }
             string countQuery = "select count(Id) as count from student";
             SqlCommand countCommand = new SqlCommand(countQuery, connection);
