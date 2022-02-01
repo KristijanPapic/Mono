@@ -13,7 +13,7 @@ namespace MonoProjekt2.Repository
     public class CourseRepository
     {
         private readonly string connectionString = "Server = tcp:monoprojektdbserver.database.windows.net,1433;Initial Catalog = monoprojekt; Persist Security Info=False;User ID = kristijan; Password=Robinhoodr52600;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout = 30;";
-        public async Task<List<Course>> GetAllCoursesAsync(CourseFilter courseFilter)
+        public async Task<List<Course>> GetAllCoursesAsync(Boolean dontGetList,CourseFilter courseFilter)
         {
             
             SqlConnection connection = new SqlConnection(connectionString);
@@ -47,7 +47,7 @@ namespace MonoProjekt2.Repository
             List<Course> courses = new List<Course>();
             foreach (DataRow dataRow in course.Tables[0].Rows)
             {
-                courses.Add(new Course(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]),await studentRepository.StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["Id"])))));
+                courses.Add(new Course(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]),dontGetList ? new List<Models.StudentListModel>() : await studentRepository.StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["Id"])))));
             }
             return courses;
 

@@ -17,15 +17,15 @@ namespace MonoProjekt2WebApi.Controllers
     public class CourseController : ApiController
     {
         CourseService service = new CourseService();
-        public async Task<HttpResponseMessage> GetAllCourses(string search="")
+        public async Task<HttpResponseMessage> GetAllCourses(Boolean dontGetList = false,string search="")
         {
             CourseFilter courseFilter = new CourseFilter(search);
-            List<Course> courses = await service.GetAllCoursesAsync(courseFilter);
+            List<Course> courses = await service.GetAllCoursesAsync(dontGetList,courseFilter);
             if (courses == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there are curently no courses in the database");
             List<CourseViewModel> viewCourses = new List<CourseViewModel>();
             foreach(Course course in courses)
             {
-                viewCourses.Add(new CourseViewModel(course.Id, course.Name, course.Students.Count, course.Students));
+                viewCourses.Add(new CourseViewModel(course.Id, course.Name,course.Students.Count, course.Students));
             }
             return Request.CreateResponse(HttpStatusCode.OK, viewCourses);
         }

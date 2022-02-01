@@ -12,10 +12,10 @@ namespace MonoProjekt2.Servis
 {
     public class CourseService
     {
-        public async Task<List<Course>> GetAllCoursesAsync(CourseFilter courseFilter)
+        public async Task<List<Course>> GetAllCoursesAsync(Boolean dontGetList,CourseFilter courseFilter)
         {
             CourseRepository courseRepository = new CourseRepository();
-            List<Course> courses = await courseRepository.GetAllCoursesAsync(courseFilter);
+            List<Course> courses = await courseRepository.GetAllCoursesAsync(dontGetList,courseFilter);
             return courses;
         }
         public async Task<Course> GetCourseAsync(Guid id)
