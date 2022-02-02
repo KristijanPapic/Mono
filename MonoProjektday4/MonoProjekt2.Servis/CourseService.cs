@@ -1,4 +1,6 @@
 ﻿using MonoProjekt2.Common.Filters;
+using MonoProjekt2.Common.Paging;
+using MonoProjekt2.Common.Sorting;
 using MonoProjekt2.DAL.Entities;
 using MonoProjekt2.Models;
 using MonoProjekt2.Models.DomainModels;
@@ -19,9 +21,9 @@ namespace MonoProjekt2.Servis
             this.courseRepository = courseRepository;
         }
 
-        public async Task<List<Course>> GetAllCoursesAsync(Boolean dontGetList, CourseFilter courseFilter)
+        public async Task<List<Course>> GetAllCoursesAsync(CourseFilter courseFilter, Sort sort, Paging paging)
         {
-            List<Course> courses = await courseRepository.GetAllCoursesAsync(dontGetList, courseFilter);
+            List<Course> courses = await courseRepository.GetAllCoursesAsync(courseFilter,sort,paging);
             return courses;
         }
         public async Task<Course> GetCourseAsync(Guid id)

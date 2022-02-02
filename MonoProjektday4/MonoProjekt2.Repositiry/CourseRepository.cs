@@ -7,6 +7,8 @@ using MonoProjekt2.DAL.Entities;
 using System.Threading.Tasks;
 using MonoProjekt2.Models.DomainModels;
 using MonoProjekt2.Common.Filters;
+using MonoProjekt2.Common.Sorting;
+using MonoProjekt2.Common.Paging;
 
 namespace MonoProjekt2.Repository
 {
@@ -21,7 +23,7 @@ namespace MonoProjekt2.Repository
             this.studentRepository = studentRepository;
         }
 
-        public async Task<List<Course>> GetAllCoursesAsync(Boolean dontGetList, CourseFilter courseFilter)
+        public async Task<List<Course>> GetAllCoursesAsync(CourseFilter courseFilter, Sort sort,Paging paging)
         {
 
             SqlConnection connection = new SqlConnection(connectionString);
@@ -38,6 +40,12 @@ namespace MonoProjekt2.Repository
                 command = new SqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@FILTER", "%" + courseFilter.NameFilterParam + "%");                  //napravim paging i sort za course kad paging za studenta do kraja napravim
             }
+            if (!(sort.SortBy == ""))
+            {
+                command.CommandText = command.CommandText.Insert(command.CommandText.Length, " order by " + sort.SortBy + " " + sort.SortMetod);
+            }
+
+            command.CommandText = command.CommandText.Insert(command.CommandText.Length, " offset " + paging.GetElementsStart() + " rows fetch next " + paging.Rpp + " rows only;");
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             DataSet course = new DataSet();
             try
@@ -55,7 +63,7 @@ namespace MonoProjekt2.Repository
             List<Course> courses = new List<Course>();
             foreach (DataRow dataRow in course.Tables[0].Rows)
             {
-                courses.Add(new Course(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]), dontGetList ? new List<Models.StudentListModel>() : await studentRepository.StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["Id"])))));
+                courses.Add(new Course(Guid.Parse(Convert.ToString(dataRow["Id"])), Convert.ToString(dataRow["Name"]), courseFilter.DontGetList ? new List<Models.StudentListModel>() : await studentRepository.StudentsByCourseAsync(Guid.Parse(Convert.ToString(dataRow["Id"])))));
             }
             return courses;
 

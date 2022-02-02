@@ -1,4 +1,6 @@
 ﻿using MonoProjekt2.Common.Filters;
+using MonoProjekt2.Common.Paging;
+using MonoProjekt2.Common.Sorting;
 using MonoProjekt2.DAL.Entities;
 using MonoProjekt2.Models.DomainModels;
 using MonoProjekt2.Servis;
@@ -23,10 +25,12 @@ namespace MonoProjekt2WebApi.Controllers
             this.courseService = courseService;
         }
 
-        public async Task<HttpResponseMessage> GetAllCourses(Boolean dontGetList = false,string search="")
+        public async Task<HttpResponseMessage> GetAllCourses(Boolean dontGetList = false,string search="", string sortBy = "Name", string sortMethod = "", int page = 1)
         {
-            CourseFilter courseFilter = new CourseFilter(search);
-            List<Course> courses = await courseService.GetAllCoursesAsync(dontGetList,courseFilter);
+            CourseFilter courseFilter = new CourseFilter(search,dontGetList);
+            Sort sort = new Sort(sortBy, sortMethod);
+            Paging paging = new Paging(page);
+            List<Course> courses = await courseService.GetAllCoursesAsync(courseFilter,sort,paging);
             if (courses == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there are curently no courses in the database");
             List<CourseViewModel> viewCourses = new List<CourseViewModel>();
             foreach(Course course in courses)
