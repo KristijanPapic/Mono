@@ -42,10 +42,10 @@ namespace MonoProjekt2.Repository
             }
             if (!(sort.SortBy == ""))
             {
-                command.CommandText = command.CommandText.Insert(command.CommandText.Length, " order by " + sort.SortBy + " " + sort.SortMetod);
+                command.CommandText = command.CommandText.Insert(command.CommandText.Length, $" order by { sort.SortBy} { sort.SortMetod}");
             }
 
-            command.CommandText = command.CommandText.Insert(command.CommandText.Length, " offset " + paging.GetElementsStart() + " rows fetch next " + paging.Rpp + " rows only;");
+            command.CommandText = command.CommandText.Insert(command.CommandText.Length, $" offset { paging.GetElementsStart()} rows fetch next {paging.Rpp} rows only;");
             SqlDataAdapter adapter = new SqlDataAdapter(command);
             DataSet course = new DataSet();
             try
