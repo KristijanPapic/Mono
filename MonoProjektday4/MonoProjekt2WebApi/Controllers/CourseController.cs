@@ -1,4 +1,5 @@
-﻿using MonoProjekt2.Common.Filters;
+﻿using AutoMapper;
+using MonoProjekt2.Common.Filters;
 using MonoProjekt2.Common.Paging;
 using MonoProjekt2.Common.Sorting;
 using MonoProjekt2.DAL.Entities;
@@ -19,10 +20,12 @@ namespace MonoProjekt2WebApi.Controllers
     public class CourseController : ApiController
     {
         ICourseService courseService;
+        IMapper mapper;
 
-        public CourseController(ICourseService courseService)
+        public CourseController(ICourseService courseService,IMapper mapper)
         {
             this.courseService = courseService;
+            this.mapper = mapper;
         }
 
         public async Task<HttpResponseMessage> GetAllCourses(Boolean dontGetList = false,string search="", string sortBy = "Name", string sortMethod = "", int page = 1)
@@ -30,14 +33,16 @@ namespace MonoProjekt2WebApi.Controllers
             CourseFilter courseFilter = new CourseFilter(search,dontGetList);
             Sort sort = new Sort(sortBy, sortMethod);
             Paging paging = new Paging(page);
-            List<Course> courses = await courseService.GetAllCoursesAsync(courseFilter,sort,paging);
+            /* List<Course> courses = await courseService.GetAllCoursesAsync(courseFilter,sort,paging);
             if (courses == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there are curently no courses in the database");
             List<CourseViewModel> viewCourses = new List<CourseViewModel>();
             foreach(Course course in courses)
             {
                 viewCourses.Add(new CourseViewModel(course.Id, course.Name,course.Students.Count, course.Students));
-            }
-            return Request.CreateResponse(HttpStatusCode.OK, viewCourses);
+            } */
+            List<Course> courses = await courseService.GetAllCoursesAsync(courseFilter, sort, paging);
+            List<CourseViewModel> coursesVM = mapper.Map<List<CourseViewModel>>(courses);
+            return Request.CreateResponse(HttpStatusCode.OK, coursesVM);
         }
         public async Task<HttpResponseMessage> GetCourse([FromUri] Guid id)
         {

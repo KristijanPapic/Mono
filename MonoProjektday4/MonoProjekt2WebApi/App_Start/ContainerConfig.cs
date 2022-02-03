@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
+using AutoMapper;
+using AutoMapper.Contrib.Autofac.DependencyInjection;
 using MonoProjekt2.Repositiry;
 using MonoProjekt2.Repository;
 using MonoProjekt2.Repository.Common;
@@ -27,6 +29,8 @@ namespace MonoProjekt2WebApi.App_Start
             builder.RegisterModule(new ServiceDIModule());
 
             //builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
+
+            builder.RegisterAutoMapper(typeof(Program).Assembly);
 
 
             var container = builder.Build();

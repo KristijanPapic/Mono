@@ -445,3 +445,7 @@ C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\System.Web.Http.SelfHost.xml
 C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\MonoProjekt2.Repository.Common.dll
 C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\MonoProjekt2.Repository.Common.pdb
 C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\MonoProjekt2.Repository.Common.dll.config
+C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\AutoMapper.Contrib.Autofac.DependencyInjection.dll
+C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\AutoMapper.dll
+C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\AutoMapper.xml
+C:\Mono\MonoProjektday4\MonoProjekt2WebApi\bin\AutoMapper.Contrib.Autofac.DependencyInjection.pdb
