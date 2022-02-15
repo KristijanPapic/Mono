@@ -14,7 +14,8 @@ namespace MonoProjekt2WebApi.Models.ViewModels
         private List<StudentListModel> students;
 
 
-        public CourseViewModel(Guid id, string name, int numberOfStudent ,List<StudentListModel> students)
+        public CourseViewModel(){}
+        public CourseViewModel(Guid id, string name,List<StudentListModel> students,int numberOfStudent)
         {
             Id = id;
             Name = name;

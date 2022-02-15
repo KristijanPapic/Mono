@@ -6,7 +6,6 @@ D:\Mono\Mono\MonoProjektday4\MonoProjekt2.DAL\obj\Debug\MonoProjekt2.DAL.dll
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.DAL\obj\Debug\MonoProjekt2.DAL.pdb
 C:\Mono\MonoProjektday4\MonoProjekt2.DAL\bin\Debug\MonoProjekt2.DAL.dll
 C:\Mono\MonoProjektday4\MonoProjekt2.DAL\bin\Debug\MonoProjekt2.DAL.pdb
-C:\Mono\MonoProjektday4\MonoProjekt2.DAL\obj\Debug\MonoProjekt2.DAL.csproj.AssemblyReference.cache
 C:\Mono\MonoProjektday4\MonoProjekt2.DAL\obj\Debug\MonoProjekt2.DAL.csproj.CoreCompileInputs.cache
 C:\Mono\MonoProjektday4\MonoProjekt2.DAL\obj\Debug\MonoProjekt2.DAL.dll
 C:\Mono\MonoProjektday4\MonoProjekt2.DAL\obj\Debug\MonoProjekt2.DAL.pdb

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="taskscss.css">
+    <script src="tasksjs.js"></script>
+    <title>Task Manager</title>
+</head>
+<body>
+    <h1 id="title">Task Manager</h1>
+    <div id="new_task">
+    <h3>Enter new task</h3>
+    <form action="#" id="form">
+        <label for="task_name">Task Name</label>
+        <input type="text" name="task_name" id="task_name" placeholder="Please enter task name"><br>
+        <label for="task_desc">Task Description</label>
+        <input type="text" name="task_desc" id="task_desc" placeholder="Please enter task description"><br>
+        <label for="task_date">Task date</label>
+        <input type="date" name="task_date" id="task_date"><br>
+        <input type="checkbox" name="important" id="important" value="true">
+        <label for="important">Important?</label><br>
+        <button type="button" onclick="Add()">Add new task</button>
+    </form>
+</div>
+    <div id="divider">
+        <p id="bar">------------</p>
+    </div>
+    <h3>All Tasks</h3>
+    <div id="tasks">
+        <p id="test">
+
+        </p>
+    </div>
+      
+</body>
+
+</html>

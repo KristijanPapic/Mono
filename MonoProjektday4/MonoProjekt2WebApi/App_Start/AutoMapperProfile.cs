@@ -12,7 +12,8 @@ namespace MonoProjekt2WebApi.App_Start
     {
         public AutoMapperProfile()
         {
-            CreateMap<Course,CourseViewModel>().ForMember(p=>p.NumberOfStudent, s=>s.Ignore());
+            //CreateMap<Course,CourseViewModel>().ForMember(p=>p.NumberOfStudent, s=>s.Ignore());
+            CreateMap<Course, CourseViewModel>().BeforeMap((s, d) => d.NumberOfStudent = s.Students.Count);
             CreateMap<CourseViewModel, Course>();
         }
     }

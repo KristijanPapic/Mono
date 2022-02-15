@@ -12,7 +12,6 @@ D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Model.Common\obj\Debug\MonoProjekt2.Mo
 D:\Mono\Mono\MonoProjektday4\MonoProjekt2.Model.Common\obj\Debug\MonoProjekt2.Model.Common.pdb
 C:\Mono\MonoProjektday4\MonoProjekt2.Model.Common\bin\Debug\MonoProjekt2.Model.Common.dll
 C:\Mono\MonoProjektday4\MonoProjekt2.Model.Common\bin\Debug\MonoProjekt2.Model.Common.pdb
-C:\Mono\MonoProjektday4\MonoProjekt2.Model.Common\obj\Debug\MonoProjekt2.Model.Common.csproj.AssemblyReference.cache
 C:\Mono\MonoProjektday4\MonoProjekt2.Model.Common\obj\Debug\MonoProjekt2.Model.Common.csproj.CoreCompileInputs.cache
 C:\Mono\MonoProjektday4\MonoProjekt2.Model.Common\obj\Debug\MonoProjekt2.Model.Common.dll
 C:\Mono\MonoProjektday4\MonoProjekt2.Model.Common\obj\Debug\MonoProjekt2.Model.Common.pdb

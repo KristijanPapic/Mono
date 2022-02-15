@@ -30,7 +30,7 @@ namespace MonoProjekt2WebApi.App_Start
 
             //builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
 
-            builder.RegisterAutoMapper(typeof(Program).Assembly);
+               
 
 
             var container = builder.Build();

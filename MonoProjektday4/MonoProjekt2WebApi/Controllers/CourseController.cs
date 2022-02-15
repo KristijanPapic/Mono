@@ -42,13 +42,17 @@ namespace MonoProjekt2WebApi.Controllers
             } */
             List<Course> courses = await courseService.GetAllCoursesAsync(courseFilter, sort, paging);
             List<CourseViewModel> coursesVM = mapper.Map<List<CourseViewModel>>(courses);
-            return Request.CreateResponse(HttpStatusCode.OK, coursesVM);
+            List<Course> coursetest = mapper.Map<List<Course>>(coursesVM);
+            return Request.CreateResponse(HttpStatusCode.OK, coursetest);
         }
         public async Task<HttpResponseMessage> GetCourse([FromUri] Guid id)
         {
             Course course = await  courseService.GetCourseAsync(id);
             if (course == null) return Request.CreateResponse(HttpStatusCode.NotFound, "there is curently no courses with that id");
-            CourseViewModel viewCourse = new CourseViewModel(course.Id, course.Name, course.Students.Count, course.Students);
+            CourseViewModel viewCourse = new CourseViewModel(course.Id, course.Name, course.Students, course.Students.Count)
+            {
+
+            };
             return Request.CreateResponse(HttpStatusCode.OK, viewCourse);
         }
 
