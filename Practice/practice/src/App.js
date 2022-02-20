@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/navbar.js'
 import Manufacturers from './components/manufacturers.js';
 import Models from './components/models.js'
+import ModelVersions from './components/modelVersions';
 import axios from 'axios';
 import{useState,useEffect} from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -45,6 +46,12 @@ function App() {
             path='/Manufacturer/:id'
             element={
               <Models/>
+            }
+            />
+            <Route
+            path='/Model/:modelId'
+            element={
+              <ModelVersions/>
             }
             />
             </Routes>

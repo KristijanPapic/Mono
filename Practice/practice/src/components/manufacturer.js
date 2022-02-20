@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 
 function Manufacturer({manufacturer}){
     return (
-        <Container className="bg-light border">
-            <Row><img className="man_img" src={manufacturer.ImageURL} alt="" /></Row>
-            <Link to={'/Manufacturer/' + manufacturer.Id}><Row><p>{manufacturer.Name}</p></Row></Link>
+        <Container id='man_con' className="bg-light border m-1">
+            <Row><img className='man_img' src={manufacturer.ImageURL} alt="" /></Row>
+            <Row className='man_name'><Link to={'/Manufacturer/' + manufacturer.Id}><p>{manufacturer.Name}</p></Link></Row>
         </Container>
     );
 }

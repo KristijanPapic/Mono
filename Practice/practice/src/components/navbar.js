@@ -10,7 +10,7 @@ function NavigationBar(){
     className='mb-3'
   >
     <NavbarBrand href="/">
-      reactstrap
+      AuTOP
     </NavbarBrand>
     <NavbarToggler onClick={function noRefCheck(){}} />
     <Collapse navbar>

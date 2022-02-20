@@ -38,6 +38,18 @@
 }
 
 .man_img{
-  max-width: 80px;
-  max-height: 80px;
+    max-width: 500px;
+    max-height: 150px;
+    
 }
+#man_con{
+  width: 150px;
+  height: 150px;
+}
+
+.mod_img{
+  max-width: 150px;
+  max-height: 100px;
+}
+
+
