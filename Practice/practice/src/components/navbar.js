@@ -1,13 +1,14 @@
-import {Navbar,Nav,NavbarBrand,NavbarToggler,NavItem,NavLink,UncontrolledDropdown,DropdownToggle,DropdownItem,NavbarText,DropdownMenu,Collapse} from 'reactstrap'
+import {Navbar,Nav,NavbarBrand,NavbarToggler,NavItem,NavLink,UncontrolledDropdown,DropdownToggle,DropdownItem,NavbarText,DropdownMenu,Collapse,Form,Input,Button} from 'reactstrap'
 
 function NavigationBar(){
     return(
         <div>
   <Navbar
-    color="light"
-    expand="md"
+    color="info"
+    expand="lg"
     light
     className='mb-3'
+    container ='lg'
   >
     <NavbarBrand href="/">
       AuTOP
@@ -19,8 +20,8 @@ function NavigationBar(){
         navbar
       >
         <NavItem>
-          <NavLink href="/components/">
-            Components
+          <NavLink href="/">
+            Manufacturers
           </NavLink>
         </NavItem>
         <NavItem>
@@ -51,7 +52,16 @@ function NavigationBar(){
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
+        <NavItem>
+      <Form inline className="form-inline">
+      <Input className="form-control mr-sm-2 inline mx-5" type="search" placeholder="Search" aria-label="Search"/>
+    </Form>
+      </NavItem>
+      <NavItem>
+        <Button className="my-2 my-sm-0 mx-5" type="submit">Search</Button>
+      </NavItem>
       </Nav>
+      
       <NavbarText>
         Simple Text
       </NavbarText>
