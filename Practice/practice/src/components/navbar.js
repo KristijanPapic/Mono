@@ -11,7 +11,7 @@ function NavigationBar(){
     container ='lg'
   >
     <NavbarBrand href="/">
-      AuTOP
+      <img src='AA.png'/>
     </NavbarBrand>
     <NavbarToggler onClick={function noRefCheck(){}} />
     <Collapse navbar>

@@ -52,7 +52,7 @@ function Manufacturers() {
                     <h3 id='header'>Manufacturers</h3>
                 </Col>
                 <Col md="1">
-                    <Label for='sort_select'>Sort</Label>
+                    <Label for='sort_select' className='ms-3'>Sort:</Label>
                 </Col>
                 <Col md="2">
                     <Input type='select' id='sort_select' name='sort_select' size="sm" onChange={sorting}>
