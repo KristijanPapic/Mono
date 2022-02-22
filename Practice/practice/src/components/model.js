@@ -15,7 +15,6 @@ const link = (id) =>{
 
     return(
         <Container className="list_container bg-light border pb-3 my-2" id='list_con' onClick={link}>
-            {console.log(model)}
             <p>{model.model.Name}</p>
             <img className='mod_img' src={model.model.ImageURL}></img>
         </Container>

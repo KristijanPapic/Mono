@@ -52,14 +52,6 @@ function NavigationBar(){
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
-        <NavItem>
-      <Form inline className="form-inline">
-      <Input className="form-control mr-sm-2 inline mx-5" type="search" placeholder="Search" aria-label="Search"/>
-    </Form>
-      </NavItem>
-      <NavItem>
-        <Button className="my-2 my-sm-0 mx-5" type="submit">Search</Button>
-      </NavItem>
       </Nav>
       
       <NavbarText>

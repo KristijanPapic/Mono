@@ -16,33 +16,16 @@ import { Container, footer } from 'reactstrap'
 
 function App() {
 
-  const [manufacturers,setManufacturers]= useState([])
-
-  useEffect(() => {
-    const getManufacturers = async () => {
-      await fetchManufacturers();
-    }
-    getManufacturers()
-  }, [])
-  
-  
-  const fetchManufacturers = async () => {
-    axios.get('https://localhost:44343/api/Manufacturer').then((response) => {
-      console.log(response.data);
-        setManufacturers(response.data);
-        return response.data;
-      })
-    };
   return (
     <Router>
       <div className="App" id='page-container'>
         <Navbar/>
-        <Container className='bg-light border vh-100 mb-5' id='page-content'>
+        <Container className='bg-light border mb-5' id='page-content'>
           <Routes>
             <Route
             path='/'
             element={
-              <Manufacturers manufacturers={manufacturers}/>
+              <Manufacturers/>
             }
             />
             <Route

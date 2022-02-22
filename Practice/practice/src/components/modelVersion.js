@@ -8,7 +8,7 @@ import '../App.css'
 
 function ModelVersion(modelVersion){
     return(
-        <Container className='bg-light border' id='list_con'>
+        <Container className='bg-light border my-2' id='list_con'>
             <Row>
                 <Col>
                 <img className='mod_img' src={modelVersion.modelVersion.Model.ImageURL}/>

@@ -1,14 +1,20 @@
 import {useParams} from 'react-router-dom'
 import{useState,useEffect} from 'react'
 import axios from 'axios';
-import{Container,Row} from 'reactstrap'
+import{Container,Row,Col,Spinne,Label,Input,Spinner} from 'reactstrap'
 import Model from './model.js'
 import ModelVersion from './modelVersion.js'
+import SearchBar from './searchBar.js';
+import '../App.css'
+import Filter from './filter.js';
 
 
 function ModelVersions() {
 
 const [modelVersions,setModelVersions] = useState([]);
+const [sort, setSort] = useState('ASC')
+const [sortby,setSortBy] = useState('Year')
+const [search,setSearch] = useState("")
 const {modelId} = useParams();
 
 useEffect(() => {
@@ -16,22 +22,87 @@ useEffect(() => {
         await FetchModelVersions();
         }
     Get()
-},[])
+},[sort,search])
 
 const FetchModelVersions = async () => {
-    axios.get('https://localhost:44343/api/ModelVersion/',{params: {ModelId : modelId}}).then((response) => {
+    axios.get('https://localhost:44343/api/ModelVersion/',{params: {Name: search, ModelId : modelId,sortby: sortby,sortMethod: sort}}).then((response) => {
         console.log(modelId)
         console.log(response.data);
       setModelVersions(response.data)  
 })
 }
-
+const sorting = (e) => {
+    setSort(e.target.value)
+    switch(e.target.value) {
+        case 'NASC':
+            setSortBy('Name')
+            setSort('ASC')
+            break;
+        case 'NDESC':
+            setSortBy('Name')
+            setSort('DESC')
+            break;
+        case 'YASC':
+            setSortBy('Year')
+            setSort('ASC')
+            break;
+        case 'YDESC':
+            setSortBy('Year')
+            setSort('DESC')
+            break;
+    }
+}
+const handleClick = (input) => {
+    setSearch(input);
+}
 return(
-    <Container>
-    {modelVersions == null || modelVersions.lenght < 1 ? (<p>loading</p>) : (
-        modelVersions.map((modelVersion) => (
-        <ModelVersion modelVersion = {modelVersion}/>
-    ))) }
+    <Container id='view_con'>
+        <SearchBar click={handleClick}/>
+        <Row>
+            <Col md='9'>
+               {modelVersions.length < 1 ? (<p></p>) : (<h3 id='header'>{modelVersions[0].Model.Manufacturer.Name} {modelVersions[0].Model.Name} versions:</h3>)} 
+            </Col>
+            <Col md="1">
+                    <Label for='sort_select'>Sort</Label>
+                </Col>
+                <Col md="2">
+                    <Input type='select' id='sort_select' name='sort_select' size="sm" onChange={sorting}>
+                        <option selected value='NASC'>
+                            Name - ASC
+                        </option>
+                        <option value='NDESC'>
+                            Name - DESC
+                        </option>
+                        <option value='YASC'>
+                            Year - ASC
+                        </option>
+                        <option value='YDESC'>
+                            Year - DESC
+                        </option>
+                    </Input>
+                </Col>
+        </Row>
+        
+    {modelVersions == null || modelVersions.lenght < 1 ? (
+        <Spinner
+        color="primary"
+        size=""
+      >
+        Loading...
+      </Spinner>
+    ) : (
+        <Row>
+            <Col md='3'>
+            <Filter/>
+            </Col>
+
+            <Col md='9'>
+                {modelVersions.map((modelVersion) => (
+                    <ModelVersion modelVersion = {modelVersion}/>
+                ))}
+            </Col>
+        </Row>
+        ) }
 </Container>
 )
 }
